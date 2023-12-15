@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="http://localhost/Website/"></base>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Thêm sản phẩm mới</title>
+    <link rel="icon" type="image/x-icon" href="public/images/iconu.png">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="public/css/font-awesome.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="public/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="public/css/AdminLTE.css">
+    <link rel="stylesheet" href="public/css/ionicons.min.css">
+    <meta property="fb:app_id" content="659513967881060">
+
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="public/css/_all-skins.min.css">
+
+
+    <script src="public/js/loader.js"></script>
+    <script src="public/ckeditor/ckeditor.js"></script>
+    <style>
+        .content-header h1,
+        th,
+        label {
+            color: #333;
+        }
+
+        label {
+            font-weight: 600 !important;
+        }
+
+        .maudo {
+            color: red
+        }
+
+        .mauxanh18 {
+            color: green;
+        }
+    </style>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <!-- Vung Header -->
+        <header class="main-header">
+            <a href="http://localhost/Website/admin" class="logo">
+        <span class="logo-lg">Quản trị hệ thống</span>
+    </a>
+            <nav class="navbar navbar-static-top" style="height: 52px">
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav" style="height: 52px;  padding: 1px">
+                        <li class="dropdown notifications-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-bell-o"></i>
+                      <span class="label label-warning">
+                          2                      </span>
+                  </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="#">
+                              <i class="fa fa-users text-aqua"></i>
+                              2 
+                              Đơn hàng chưa duyệt
+                          </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="#">
+                      <i class="fa fa-users text-aqua"></i> 
+                      0 
+                      Đơn hàng đang giao
+                  </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="http://localhost/Website/admin/orders">Xem</a></li>
+                            </ul>
+                        </li>
+                        <li style="height: 52px">
+                            <a target="_blank" href="http://localhost/Website/">
+        <span class="glyphicon glyphicon-home"></span>
+        <span>Website</span>
+    </a>
+                        </li>
+                        <li class="dropdown user user-menu" style="height: 52px; padding: 0px">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <img src="public/images/admin/user-group.png" class="user-image" alt="User Image">
+        <span class="hidden-xs">ADMIN</span>
+    </a>
+                            <ul class="dropdown-menu">
+                                <li class="user-header">
+                                    <img src="public/images/admin/user-group.png" class="img-circle" alt="User Image">
+                                    <p>ADMIN<small>0167892615</small></p>
+                                </li>
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="http://localhost/Website/admin/useradmin/update/1" class="btn btn-default btn-flat">Chi tiết</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="admin/user/logout.html" class="btn btn-default btn-flat">Thoát</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- ./Vung Header -->
+        <aside class="main-sidebar">
+
+            <section class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="treeview">
+                        <a href="http://localhost/Website/admin">
+                    <i class="fa fa-bar-chart"></i> <span>Thống kê</span>
+                </a>
+                    </li>
+                    <li class="header">QUẢN LÝ CỬA HÀNG</li>
+                    <li class="treeview">
+                        <a href="http://localhost/Website/admin/content">
+                    <i class="glyphicon glyphicon-list"></i><span>Tin tức</span>
+                </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="http://localhost/Website/admin/product">
+                    <i class="fa fa-leaf"></i><span>Sản phẩm</span>
+                </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="http://localhost/Website/admin/category">
+                    <i class="fa fa-indent"></i><span>Loại sản phẩm</span>
+                </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="http://localhost/Website/admin/producer">
+                    <i class="fa fa-gift"></i><span>Nhà cung cấp</span>
+                </a>
+                    </li>
+                    <li class="header">QUẢN LÝ BÁN HÀNG</li>
+                    <li class="treeview">
+                        <a href="http://localhost/Website/admin/coupon">
+                    <i class="fa fa-diamond"></i> <span>Mã giảm giá</span>
+                </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="http://localhost/Website/admin/contact">
+                    <i class="fa fa-envelope"></i> <span>Liên hệ</span>
+                </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="http://localhost/Website/admin/orders">
+                    <i class="fa fa-shopping-cart"></i> <span>Đơn hàng</span>
+                </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="http://localhost/Website/admin/customer">
+                    <i class="fa fa-user"></i><span>Khách hàng</span>
+                </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="http://localhost/Website/admin/sliders">
+                <i class="fa fa-cogs"></i> <span>Giao diện</span>
+            </a>
+                    </li>
+                    <li class="header">CÀI ĐẶT</li>
+                    <li class="treeview">
+                        <a href="#">
+                <i class="glyphicon glyphicon-cog"></i><span>Hệ thống</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+                        <ul class="treeview-menu">
+                            <li class="active">
+                                <a href="http://localhost/Website/admin/configuration/update">
+                        <i class="fa fa-cogs"></i> Cấu hình
+                    </a>
+                            </li>
+                            <li>
+                                <a href="admin/useradmin">
+                        <i class="fa fa-users"></i> Nhân viên
+                    </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="admin/user/logout.html"><i class="fa fa-sign-out text-red"></i> <span>Thoát</span></a></li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <form action="http://localhost/Website/admin/product/insert.html" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+            <div class="content-wrapper">
+                <form action="http://localhost/Website/admin/product/insert.html" enctype="multipart/form-data" method="POST" accept-charset="utf-8">
+                    <section class="content-header">
+                        <h1><i class="glyphicon glyphicon-cd"></i> Thêm sản phẩm mới</h1>
+                        <div class="breadcrumb">
+                            <button type="submit" class="btn btn-primary btn-sm">
+					<span class="glyphicon glyphicon-floppy-save"></span>
+					Lưu[Thêm]
+				</button>
+                            <a class="btn btn-primary btn-sm" href="admin/product" role="button">
+					<span class="glyphicon glyphicon-remove do_nos"></span> Thoát
+				</a>
+                        </div>
+                    </section>
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box" id="view">
+                                    <div class="box-body">
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <label>Tên sản phẩm <span class = "maudo">(*)</span></label>
+                                                <input type="text" class="form-control" name="name" style="width:100%" placeholder="Tên sản phẩm">
+                                                <div class="error" id="password_error"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6" style="padding-left: 0px;">
+                                                        <div class="form-group">
+                                                            <label>Loại sản phẩm<span class = "maudo">(*)</span></label>
+                                                            <select name="catid" class="form-control">
+										<option value = "">[--Chọn loại sản phẩm--]</option>
+											<option value='2'>Cây cảnh nghệ thuật</option><option value='1'>Cây cảnh vườn</option><option value='9'>Ưa chuộng trong nhà</option><option value='3'>Cây cảnh ngoại thất</option><option value='6'>Cây cảnh để bàn</option><option value='11'>Cây cảnh văn phòng</option><option value='4'>Cây cảnh nội thất</option><option value='10'>Cây giống</option>									</select>
+                                                            <div class="error" id="password_error"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6" style="padding-right: 0px;">
+                                                        <div class="form-group">
+                                                            <label>Nhà cung cấp <span class = "maudo">(*)</span></label>
+                                                            <select name="producer" class="form-control">
+										<option value = "">[--Chọn nhà cung cấp--]</option>
+											<option value='2'>Nhà cung cấp cây cảnh Hà Nội</option><option value='1'>Digiworld</option><option value='3'>Cây cảnh Sài Gòn</option>									</select>
+                                                            <div class="error" id="password_error"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Mô tả ngắn</label>
+                                                <textarea name="sortDesc" class="form-control"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Chi tiết sản phẩm</label>
+                                                <textarea name="detail" id="detail" class="form-control"></textarea>
+                                                <script>
+                                                    CKEDITOR.replace('detail');
+                                                </script>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Giá gốc</label>
+                                                <input name="price_root" class="form-control" type="number" value="0" min="0" step="1" max="1000000000">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Khuyến mãi (%)</label>
+                                                <input name="sale_of" class="form-control" type="number">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Giá bán</label>
+                                                <input name="price_buy" class="form-control" type="number" value="0" min="0" step="1" max="1000000000">
+                                                <div class="error" id="password_error"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Số lượng</label>
+                                                <input name="number" class="form-control" type="number" value="1" min="1" step="1" max="1000">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Hình đại diện</label>
+                                                <input type="file" id="image_list" name="img" required style="width: 100%">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Hình ảnh sản phẩm</label>
+                                                <input type="file" id="image_list" name="image_list[]" multiple required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Trạng thái</label>
+                                                <select name="status" class="form-control">
+										<option value="1">Kinh doanh</option>
+										<option value="0">Chưa Kinh doanh</option>
+									</select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </section>
+                </form>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery 2.2.3 -->
+    <script src="public/js/jquery-2.2.3.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="public/js/bootstrap.js"></script>
+    <!-- AdminLTE App -->
+    <script src="public/js/app.min.js"></script>
+</body>
+
+</html>
