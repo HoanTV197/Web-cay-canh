@@ -61,15 +61,20 @@ class HoaDonBanController
     }
 
     /*----------------Lấy danh sách hóa đơn bán -------------*/
-    public function listHDB($page)
+    public function listHDB($page, $trangThai = null)
     {
         $db = new DB();
-        $record_page = 10;
+        $record_page = 5;
         $numberPage = ($page - 1) * $record_page;
-        //câu lện sql cần thực thi
-        $sql = "SELECT * FROM HoaDonBan LIMIT $numberPage, $record_page;";
+        $sql = "SELECT * FROM HoaDonBan";
+    
+        if ($trangThai !== null) {
+            $sql .= " WHERE TrangThai = '$trangThai'";
+        }
+    
+        $sql .= " LIMIT $numberPage, $record_page;";
+        
         $result = $db->executeSQL($sql);
-
         //push các bản ghi vào list hóa đơn bán
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -91,6 +96,22 @@ class HoaDonBanController
             echo "Không có hóa đơn bán nào.";
         }
         return $this->listHDB;
+    }
+
+    // Hàm tính tổng số trang
+    public function totalPage($trangThai = '0') { // Thêm tham số $trangThai
+        $db = new DB();
+        $sql = "SELECT COUNT(*) AS total FROM HoaDonBan WHERE TrangThai = '$trangThai'";
+        $result = $db->executeSQL($sql);
+    
+        if ($result) {
+            $row = $result->fetch_assoc();
+            $totalHoaDon = $row['total'];
+            $recordPerPage = 5;
+            return ceil($totalHoaDon / $recordPerPage);
+        } else {
+            return 1; // Hoặc một giá trị mặc định khác
+        }
     }
     /*----------------Lấy 1 hóa đơn bán -------------*/
     public function getHDB($maHDB)
@@ -316,18 +337,19 @@ class HoaDonBanController
         }
     }
 
-    /*----------------Lấy danh sách hóa đơn theo username--------------*/
-    public function listHD_KH($username)
+    public function listHD_KH($username, $results_per_page, $offset)
     {
-        //khởi tạo database và kết nối
+        // Khởi tạo database và kết nối
         $db = new DB();
-        //câu lện sql cần thực thi
+        // Câu lệnh SQL cần thực thi với giới hạn và vị trí bắt đầu
         $sql = "SELECT * FROM hoadonban JOIN khachhang ON hoadonban.MaKH=khachhang.MaKH
-        WHERE khachhang.username='$username';";
+                WHERE khachhang.username='$username'
+                LIMIT $offset, $results_per_page;";
         $result = $db->executeSQL($sql);
+        
         $this->listHDB = [];
-        //push các bản ghi vào list hóa đơn bán
-        if ($result->num_rows > 0) {
+    
+        if ($result !== false && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 array_push($this->listHDB, new HoaDonBan(
                     $row["MaHDB"],
@@ -345,8 +367,17 @@ class HoaDonBanController
         } else {
             echo "Không có hóa đơn bán nào.";
         }
-        return $this->listHDB;
+    
+        // Tính tổng số hóa đơn
+        $totalHoaDon = $this->sumPage();
+    
+        // Tính tổng số trang
+        $totalPages = ceil($totalHoaDon / $results_per_page);
+    
+        // Trả về danh sách hóa đơn và số trang
+        return ['listHDB' => $this->listHDB, 'totalPages' => $totalPages];
     }
+    
     /*----------------Doanh thu--------------*/
     public function doanhThu($nam)
     {
@@ -397,4 +428,8 @@ class HoaDonBanController
             return null;
         }
     }
+
+
+    
+    
 }

@@ -54,10 +54,10 @@ $itemCart = [
                         <div class="product-view-price ">
                             <div class="pull-left ">
                                 <span class="price-label ">Giá bán:</span>
-                                <span class="price "><?php echo $sanpham->getDonGiaBan(); ?>0₫</span>
+                                <span class="price "><?php echo $sanpham->getDonGiaBan(); ?>₫</span>
                             </div>
                             <div class="product-view-price-old ">
-                                <span class="price "><?php echo ($sanpham->getDonGiaBan() + 10); ?>000₫</span>
+                                <span class="price "><?php echo ($sanpham->getDonGiaBan() + 10); ?>₫</span>
                                 <span class="sale-flag ">-20%</span>
                             </div>
                         </div>
@@ -177,10 +177,10 @@ $itemCart = [
                                             </a>
                                             <div class='price-box '>
                                                 <p class='old-price '>
-                                                    <span class='price ' style='color: #fff '>" . $listsp1[$i]->getDonGiaBan() . "0₫</span>
+                                                    <span class='price ' style='color: #fff '>" . $listsp1[$i]->getDonGiaBan() . "₫</span>
                                                 </p>
                                                 <p class='special-price '>
-                                                    <span class='price'>".$listsp1[$i]->getDonGiaBan()."0₫</span>
+                                                    <span class='price'>".$listsp1[$i]->getDonGiaBan()."₫</span>
                                                 </p>
                                             </div>
                                             <div class='clear'></div>

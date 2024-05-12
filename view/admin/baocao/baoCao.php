@@ -96,9 +96,9 @@
         <div class="breadcrumb" style="display:flex;">
             <form action="?admin=baoCaoDoanhThu" method="post" style="margin-right:5px;">
                 <select name="year" style="padding:5px 10px;">
+                    <option value="2024">2024</option>
                     <option value="2023">2023</option>
                     <option value="2022">2022</option>
-                    <option value="2021">2021</option>
                 </select>
                 <button class="btn btn-primary btn-sm dropdown-toggle" type="submit">Xem</button>
             </form>
@@ -120,7 +120,7 @@
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $NgayTao = date('Y-m-d H:i:s');
         $nam = $NgayTao;
-        $year = 2023;
+        $year = 2024;
     }
     //tính doanh thu
     $dt = $hd->doanhThu($nam);
@@ -160,7 +160,7 @@
                         <div class="row">
                             <div class="col-sm-4 col-xs-6">
                                 <div class="description-block border-right">
-                                    <h5 class="description-header" style="color: #e90000;"><?php echo $tongDoanhThu . '.000' ?> VNĐ</h5>
+                                    <h5 class="description-header" style="color: #e90000;"><?php echo $tongDoanhThu . '' ?> VNĐ</h5>
                                     <span class="description-text">Tổng doanh thu</span>
                                 </div>
                                 <!-- /.description-block -->
@@ -170,84 +170,84 @@
                         <div class="col-sm-4 col-xs-6">
                             <div class="description-block border-right" style="display: inline-flex;">
                                 <span class="description-text">Doanh thu tháng 1 : </span>
-                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[1] . '0'; ?> VNĐ</h5>
+                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[1] . ''; ?> VNĐ</h5>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <div class="col-sm-4 col-xs-6">
                             <div class="description-block border-right" style="display: inline-flex;">
                                 <span class="description-text">Doanh thu tháng 2 : </span>
-                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[2] . '0'; ?> VNĐ</h5>
+                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[2] . ''; ?> VNĐ</h5>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <div class="col-sm-4 col-xs-6">
                             <div class="description-block border-right" style="display: inline-flex;">
                                 <span class="description-text">Doanh thu tháng 3 : </span>
-                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[3] . '0'; ?> VNĐ</h5>
+                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[3] . ''; ?> VNĐ</h5>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <div class="col-sm-4 col-xs-6">
                             <div class="description-block border-right" style="display: inline-flex;">
                                 <span class="description-text">Doanh thu tháng 4 : </span>
-                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[4] . '0'; ?> VNĐ</h5>
+                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[4] . ''; ?> VNĐ</h5>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <div class="col-sm-4 col-xs-6">
                             <div class="description-block border-right" style="display: inline-flex;">
                                 <span class="description-text">Doanh thu tháng 5 : </span>
-                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[5] . '0'; ?> VNĐ</h5>
+                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[5] . ''; ?> VNĐ</h5>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <div class="col-sm-4 col-xs-6">
                             <div class="description-block border-right" style="display: inline-flex;">
                                 <span class="description-text">Doanh thu tháng 6 : </span>
-                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[6] . '0'; ?> VNĐ</h5>
+                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[6] . ''; ?> VNĐ</h5>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <div class="col-sm-4 col-xs-6">
                             <div class="description-block border-right" style="display: inline-flex;">
                                 <span class="description-text">Doanh thu tháng 7 : </span>
-                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[7] . '0'; ?> VNĐ</h5>
+                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[7] . ''; ?> VNĐ</h5>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <div class="col-sm-4 col-xs-6">
                             <div class="description-block border-right" style="display: inline-flex;">
                                 <span class="description-text">Doanh thu tháng 8 : </span>
-                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[8] . '0'; ?> VNĐ</h5>
+                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[8] . ''; ?> VNĐ</h5>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <div class="col-sm-4 col-xs-6">
                             <div class="description-block border-right" style="display: inline-flex;">
                                 <span class="description-text">Doanh thu tháng 9 : </span>
-                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[9] . '0'; ?> VNĐ</h5>
+                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[9] . ''; ?> VNĐ</h5>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <div class="col-sm-4 col-xs-6">
                             <div class="description-block border-right" style="display: inline-flex;">
                                 <span class="description-text">Doanh thu tháng 10 : </span>
-                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[10] . '0'; ?> VNĐ</h5>
+                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[10] . ''; ?> VNĐ</h5>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <div class="col-sm-4 col-xs-6">
                             <div class="description-block border-right" style="display: inline-flex;">
                                 <span class="description-text">Doanh thu tháng 11 : </span>
-                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[11] . '0'; ?> VNĐ</h5>
+                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[11] . ''; ?> VNĐ</h5>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <div class="col-sm-4 col-xs-6">
                             <div class="description-block border-right" style="display: inline-flex;">
                                 <span class="description-text">Doanh thu tháng 12 : </span>
-                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[12] . '0'; ?> VNĐ</h5>
+                                <h5 class="description-header" style="color: #e90000;padding-left: 10px;"><?php echo $doanhThu[12] . ''; ?> VNĐ</h5>
                             </div>
                             <!-- /.description-block -->
                         </div>
@@ -285,7 +285,7 @@ echo " <script>
                     ['12/".$year."',$sl[12], $doanhThu[12]],
                 ])
                 var options = {
-                 title: 'Số lượng bán ra từ 01/2023 - 12/2023',
+                 title: 'Số lượng bán ra từ 01/2024 - 12/2024',
                     seriesType: 'bars'
                 };
 

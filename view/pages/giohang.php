@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $MaHDB = $hd->autoMaHDB();
     //insert hóa đơn
     $hd->insertHDB($hd->autoMaHDB(), $NgayTao, $total, 'MS10', 'Tiền mặt', '0', '0', '', $MaKH, 'NV001');
+    var_dump($MaHDB);
    //insert chi tiết hóa đơn
     foreach($maSP as $i){
         $MaSP = $i->code;
@@ -61,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $hd->insertCTHDB($MaHDB,$MaCTHDB,$MaSP,$SoLuong);
     }
     echo "<script type='text/javascript'>this.handleOrderSuccess()</script>";
+    
 }
 ?>
  

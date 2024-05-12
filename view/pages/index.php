@@ -12,7 +12,7 @@ session_start();
     <meta name="description" content="">
     <meta name="author" content="">
     <title>
-        Website cây cảnh
+        Website cây cảnh Bonsai
     </title>
     <link rel="icon" type="image/x-icon" href="../../assets/public/images/cart2.png">
     <link rel="stylesheet" href="">
@@ -63,10 +63,10 @@ session_start();
             <div class=" col-xs-12 col-sm-12 col-md-5 col-lg-5 search ">
                 <div class=" contact-row ">
                     <div class=" phone inline ">
-                        <i class=" icon fa fa-phone "></i> 0123456789
+                        <i class=" icon fa fa-phone "></i> 0383971115
                     </div>
                     <div class=" contact inline ">
-                        <i class=" icon fa fa-envelope "></i> nhom14@gmail.com
+                        <i class=" icon fa fa-envelope "></i> WebsitebancaycanhBonsai@gmail.com
                     </div>
                 </div>
                 <form action="?pages=timKiemSP&page=1 " method="post" role=" form ">
@@ -221,11 +221,11 @@ session_start();
                                 </li>
                                 <li class=" clearfix ">
                                     <i class=" fa fa-phone "></i>
-                                    <span>0123456789 - 0123456789</span>
+                                    <span>0383971115 - 0383971115</span>
                                 </li>
                                 <li class=" clearfix ">
                                     <i class=" fa fa-envelope "></i>
-                                    <span><a href=" # "> shopcaycanh@gmail.com</a></span>
+                                    <span><a href=" # "> WebsitebancaycanhBonsai@gmail.com</a></span>
                                 </li>
                             </ul>
                         </div>

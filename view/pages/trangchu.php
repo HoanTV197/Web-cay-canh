@@ -60,7 +60,7 @@
                             </p>
                             <p class='special-price'>
                                 <span class='price '>
-                                " . $row["DonGiaBan"] . "0₫</span>
+                                " . $row["DonGiaBan"] . "₫</span>
                             </p>
                         </div>
                         <div class='clear'></div>
@@ -103,7 +103,7 @@
                             <span class='price'>" . ($spMoi[$i]->getDonGiaBan() + 10) . "000₫</span>
                         </p>
                         <p class='special-price '>
-                            <span class='price' >" . $spMoi[$i]->getDonGiaBan() . "0₫</span>
+                            <span class='price' >" . $spMoi[$i]->getDonGiaBan() . "₫</span>
                         </p>
                     </div>
                     <div class='clear'></div>
@@ -162,7 +162,7 @@
                                     <span class='price' style='color: #fff'>".($spLoai1[$i]->getDonGiaBan()+10).",000₫</span>
                                 </p>
                                 <p class='special-price '>
-                                    <span class='price'>".$spLoai1[$i]->getDonGiaBan()."0₫</span>
+                                    <span class='price'>".$spLoai1[$i]->getDonGiaBan()."₫</span>
                                 </p>
                             </div>
                             <div class='clear'></div>
@@ -226,7 +226,7 @@
                                                 <span class='price'>".($spLoai2[$i]->getDonGiaBan()+10).",000₫</span>
                                             </p>
                                             <p class='special-price '>
-                                                <span class='price'>".$spLoai2[$i]->getDonGiaBan()."0₫</span>
+                                                <span class='price'>".$spLoai2[$i]->getDonGiaBan()."₫</span>
                                             </p>
                                         </div>
                                         <div class='text-center'><button type='button' class='them' onClick='addCart(".json_encode($itemCart).")'>Thêm vào giỏ hàng</button></div>

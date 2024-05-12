@@ -1,128 +1,104 @@
+<?php
+include '../../controller/HoaDonBanController.php';
 
+$HDB = new HoaDonBanController();
+$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Xử lý cập nhật trạng thái
+if (isset($_GET['action'], $_GET['MaHDB'])) {
+    $action = $_GET['action']; // Thay đổi tên biến thành $action
+    $maHDB = $_GET['MaHDB'];
+
+    if ($action == 'xacnhan') { // Kiểm tra xem là hành động xác nhận
+        $trangThai = 2; // Trạng thái hoàn thành
+        $message = 'Xác nhận hóa đơn thành công';
+    } elseif ($action == 'huy') { // Kiểm tra xem là hành động hủy
+        $trangThai = 1; // Trạng thái hủy
+        $message = 'Hủy hóa đơn thành công';
+    } else {
+        $trangThai = 0; // Trạng thái mặc định là chờ xác nhận
+        $message = 'Không có hành động nào được thực hiện';
+    }
+
+    if ($HDB->updateHDB($maHDB, $trangThai)) {
+        echo "<script>alert('$message'); window.location.href = '?admin=hienThiHoaDonBanXN&page=$currentPage';</script>";
+        exit;
+    } else {
+        echo "<script>alert('Cập nhật trạng thái thất bại');</script>";
+    }
+    
+}
+
+$listHDB = $HDB->listHDB($currentPage, '0'); // Lấy danh sách hóa đơn chờ xác nhận
+$totalPage = $HDB->totalPage('0'); // Tính tổng số trang hóa đơn chờ xác nhận
+?>
 
 <div class="content-wrapper">
-    <section class="content-header">
-        <h1>Danh sách hóa chờ xác nhận</h1>
-        <div class="breadcrumb">
+<section class="content-header">
+        <h1>Danh sách hóa đơn chờ xác nhận</h1>
+    </section> 
 
-            <a class="btn btn-primary btn-sm" href="?admin=themHoaDonBan" role="button">
-                <span class="glyphicon glyphicon-plus"></span> Thêm mới
-            </a>
-            <a class="btn btn-primary btn-sm dropdown-toggle" href="">
-                Xuất Exel
-
-            </a>
-        </div>
-    </section>
-    <!-- Main coupon -->
-    <section class="content">
+<section class="content">
         <div class="row">
             <div class="col-md-12">
                 <div class="box" id="view">
-                    <div class="box-header with-border">
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="row" style='padding:0px; margin:0px;'>
-                                <!--ND-->
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">Mã hóa đơn nhập </th>
-                                                <th class="text-center">Ngày tạo</th>
-                                                <th class="text-center">Tổng tiền </th>
-                                                <th class="text-center">Mã số thuế</th>
-                                                <th class="text-center">Ghi chú</th>
-                                                <th class="text-center">Phương thức thanh toán</th>
-                                                <th class="text-center">Giảm giá </th>
-                                                <th class="text-center">Trạng thái</th>
-                                                <th class="text-center">Thao tác</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            include '../../controller/HoaDonBanController.php';
-
-                                            // lấy số trang hiện tại
-                                            $currentPage = $_GET['page'];
-                                            //gọi đến controller
-                                            $HDB = new HoaDonBanController();
-                                            if(isset($_GET['update'])&& isset($_GET['MaHDB'])){
-                                               $trangThai= $_GET['update'];
-                                               $MaHDB= $_GET['MaHDB'];
-                                              // echo $trangThai,$MaHDB;
-                                               $kq= $HDB->updateHDB($MaHDB, $trangThai);
-                                               if($kq){
-                                                    echo "<script>alert('Update Thành công');</script>";
-                                               }
-                                               else{
-                                                echo "<script>alert('Update Thất bại');</script>";
-                                               }
-                                            }
-                                            $listHDB = $HDB->listHDB($currentPage);
-                                            
-                                            if(count($listHDB)==0){
-                                                echo "Không có hóa đơn nào";
-                                            }
-                                            else{
-                                                /*Hiển thị danh sách hóa đơn nhập*/
-                                            foreach ($listHDB as $i) {
-                                                if ($i->getTrangThai() =='0') {
-                                                    $str = '<tr>'
-                                                        . '<td class="text-center">' . $i->getMaHDB() . '</td>'
-                                                        . '<td class="text-center">' . $i->getNgayTao() . '</td>'
-                                                        . '<td class="text-center">' . $i->getTongTienHD() . '</td>'
-                                                        . '<td class="text-center">' . $i->getMaSoThue() . '</td>'
-                                                        . '<td class="text-center">' . $i->getGhiChu() . '</td>'
-                                                        . '<td class="text-center">' . $i->getPTThanhToan() . '</td>'
-                                                        . '<td class="text-center">' . $i->getGiamGiaHD() . '</td>'
-                                                        . '<td class="text-center">chờ xác nhận</td>'
-                                                        . "<td><a class='btn btn-success btn-xs' href='?admin=hienThiHoaDonBanXN&MaHDB=" . $i->getMaHDB() . "&update=2&page=1'>xác nhận</a></td>
-                                                <td>
-                                                <a class='btn btn-danger btn-xs' href='?admin=hienThiHoaDonBanXN&MaHDB=" . $i->getMaHDB() . "update=1&page=1'>Hủy</a>
-                                                </td>
-                                                </tr>";
-                                                    echo $str;
-                                                }
-                                            }
-                                            }
-                                            ?>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <ul class="pagination">
-                                            <!-- --------------------------------Phân trang----------------------------------- -->
-                                            <?php
-                                            $n = round($HDB->sumPage() / 10);
-                                            echo '<li><a href="?admin=hienThiHoaDonBan&page=' . ($currentPage >= 2 ? $currentPage - 1 : $currentPage) . '"> <</a></li>';
-                                            for ($i = 1; $i <= ($n); $i++) {
-                                                $str = '<li><a href="?admin=hienThiHoaDonBan&page=' . $i . '">' . $i . '</a></li>';
-                                                if ($i > 5 && $i < round($sp->sumPage('nhanvien') / 10)) {
-                                                    $str = '<li>...</li>';
-                                                    $str = '<li><a href="?admin=hienThiHoaDonBan&page=' . $n . '">' . $n . '</a></li>';
-                                                    echo $str;
-                                                    break;
-                                                }
-                                                echo $str;
-                                            }
-                                            echo '<li><a href="?admin=hienThiHoaDonBan&page=' . ($currentPage >= $n ? $currentPage : $currentPage + 1) . '">></a></li>';
-                                            ?>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- /.ND -->
-                            </div>
-                        </div>
-                        <!-- ./box-body -->
-                    </div>
-                    <!-- /.box -->
+                    <div class="box-header with-border"></div>
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                            <tr>
+                                <th class="text-center">Mã hóa đơn nhập</th>
+                                <th class="text-center">Ngày tạo</th>
+                                <th class="text-center">Tổng tiền</th>
+                                <th class="text-center">Mã số thuế</th>
+                                <th class="text-center">Ghi chú</th>
+                                <th class="text-center">Phương thức thanh toán</th>
+                                <th class="text-center">Giảm giá</th>
+                                <th class="text-center">Trạng thái</th>
+                                <th class="text-center">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (empty($listHDB)) {
+                                echo "<tr><td colspan='9' class='text-center'>Không có hóa đơn nào</td></tr>";
+                            } else {
+                                foreach ($listHDB as $i) {
+                                    echo '<tr>';
+                                    echo '<tr>';
+                                    echo '<td class="text-center">' . $i->getMaHDB() . '</td>';
+                                    echo '<td class="text-center">' . $i->getNgayTao() . '</td>';
+                                    echo '<td class="text-center">' . $i->getTongTienHD() . '</td>';
+                                    echo '<td class="text-center">' . $i->getMaSoThue() . '</td>';
+                                    echo '<td class="text-center">' . $i->getGhiChu() . '</td>';
+                                    echo '<td class="text-center">' . $i->getPTThanhToan() . '</td>';
+                                    echo '<td class="text-center">' . $i->getGiamGiaHD() . '</td>';
+                                    echo '<td class="text-center">Chờ xác nhận</td>';
+                                    echo "<td>
+                                            <a class='btn btn-success btn-xs' href='?admin=hienThiHoaDonBanXN&MaHDB={$i->getMaHDB()}&action=xacnhan&page=$currentPage'>Xác nhận</a>
+                                            <a class='btn btn-danger btn-xs' href='?admin=hienThiHoaDonBanXN&MaHDB={$i->getMaHDB()}&action=huy&page=$currentPage'>Hủy</a>
+                                          </td>";
+                                    echo '</tr>';
+                                }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
-                <!-- /.col -->
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <ul class="pagination">
+                            <?php
+                            for ($i = 1; $i <= $totalPage; $i++) {
+                                $activeClass = ($i == $currentPage) ? 'active' : '';
+                                echo "<li class='$activeClass'><a href='?admin=hienThiHoaDonBanXN&page=$i'>$i</a></li>";
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <!-- /.row -->
+        </div>
     </section>
-    <!-- /.coupon -->
 </div>

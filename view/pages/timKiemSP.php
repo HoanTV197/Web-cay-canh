@@ -124,10 +124,10 @@ $listspTK = $sp->timKiemSanPham($tenSP);
                                                 <div class=' price-box '>
 
                                                     <p class=' old-price '>
-                                                        <span class='price'>".number_format($i->getDonGiaBan() + 10).".000₫</span>
+                                                        <span class='price'>".number_format($i->getDonGiaBan() + 10)."₫</span>
                                                     </p>
                                                     <p class='special-price '>
-                                                        <span class=' price '>".number_format($i->getDonGiaBan()).".000₫</span>
+                                                        <span class=' price '>".number_format($i->getDonGiaBan())."₫</span>
                                                     </p>
                                                 </div>
                                                 <div class='text-center'><button type='button' class='them' onClick='addCart(".json_encode($itemCart).")'>Thêm vào giỏ hàng</button></div>

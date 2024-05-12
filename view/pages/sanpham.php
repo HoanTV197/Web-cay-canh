@@ -83,7 +83,7 @@ $listsp1 = $sp->getAllProduct1();
                                         <a class='ws-nw overflow ellipsis' href=cay-lan-hat-dua title=' Cây Lan Hạt Dưa'>".$listsp1[$i]->getTenSP()."</a>
                                         </div>
                                         <ul class='entry-meta'>
-                                            <li class='color '><ins>".$listsp1[$i]->getDonGiaBan()."0₫</ins><del>".($listsp1[$i]->getDonGiaBan()+10).",000₫</del></li>
+                                            <li class='color '><ins>".$listsp1[$i]->getDonGiaBan()."₫</ins><del>".($listsp1[$i]->getDonGiaBan()+10)."₫</del></li>
                                         </ul>
                                         <div>
                                         </div>
@@ -148,10 +148,10 @@ $listsp1 = $sp->getAllProduct1();
                                                 <div class=' price-box '>
 
                                                     <p class=' old-price '>
-                                                        <span class='price'>".number_format($i->getDonGiaBan() + 10).".000₫</span>
+                                                        <span class='price'>".number_format($i->getDonGiaBan() + 10)."₫</span>
                                                     </p>
                                                     <p class='special-price '>
-                                                        <span class=' price '>".number_format($i->getDonGiaBan()).".000₫</span>
+                                                        <span class=' price '>".number_format($i->getDonGiaBan())."₫</span>
                                                     </p>
                                                 </div>
                                                 <div class='text-center'><button type='button' class='them' onClick='addCart(".json_encode($itemCart).")'>Thêm vào giỏ hàng</button></div>

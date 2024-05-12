@@ -1,3 +1,4 @@
+
 <div class="content-wrapper">
     <!-- Main coupon -->
     <section class="content">
@@ -6,6 +7,7 @@
                 <div class="box" id="view">
                     <div class="box-header with-border">
                         <!-- /.box-header -->
+                        <h1 class="text-center">Lịch sử mua hàng</h1>
                         <div class="box-body">
                             <div class="row" style='padding:0px; margin:0px;'>
                                 <!--ND-->
@@ -27,80 +29,71 @@
                                         <tbody>
                                             <?php
                                             include '../../controller/HoaDonBanController.php';
-                                           
-                                           // lấy số trang hiện tại
-                                            $currentPage=$_GET['page'];
-                                            //gọi đến controller
+
+                                            // Lấy số trang hiện tại
+                                            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+                                            // Gọi đến controller
                                             $HDB = new HoaDonBanController();
                                             $username = $_SESSION['username'];
-                                            $listHDB=$HDB->listHD_KH($username);
-                                           
-                                             /*Hiển thị danh sách hóa đơn bán*/
-                                             foreach ($listHDB as $i) {
-                                                if($i->getTrangThai()=='0'){
+
+                                            // Lấy danh sách hóa đơn cho trang hiện tại
+                                            $result = $HDB->listHD_KH($username, 10, ($currentPage - 1) * 10);
+                                            $listHDB = $result['listHDB'];
+                                            $totalPages = $result['totalPages'];
+
+                                            if(isset($_GET['huy']) && isset($_GET['mahoadon'])){
+                                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                                                $huy=$HDB->updateHDB($_GET['mahoadon'], $_GET['huy']);
+                                                if($huy){
+                                                    echo "<script>alert('Bạn đã hủy đơn hàng thành công'); window.location.href = '?pages=lichSuMuaHang&page=$currentPage';</script>";
+                                                    exit;
+                                                } else{
+                                                    echo "<script>alert('Hủy đơn hàng thất bại');</script>";
+                                                }
+                                            }
+
+                                            /* Hiển thị danh sách hóa đơn bán */
+                                            foreach ($listHDB as $i) {
+                                                if ($i->getTrangThai() == '0') {
                                                     $trangThai = 'Chờ xử lý';
-                                                }
-                                                if($i->getTrangThai()=='1'){
+                                                } elseif ($i->getTrangThai() == '1') {
                                                     $trangThai = 'Hủy';
-                                                }
-                                                if($i->getTrangThai()=='2'){
+                                                } elseif ($i->getTrangThai() == '2') {
                                                     $trangThai = 'Hoàn thành';
                                                 }
-                                                if(isset($_GET['huy'])){
-                                                    $huy=$HDB->updateHDB($_GET['mahoadon'], $_GET['huy']);
-                                                    if($huy){
-                                                        echo "<script>alert('Bạn đã hủy đơn hàng Thành công');</script>";
-                                                        break;
-                                                   }
-                                                   else{
-                                                    echo "<script>alert('Hủy Thất bại');</script>";
-                                                        break;
-                                                   }
-                                                }
+
                                                 echo $str = '<tr>'
-                                                    . '<td class="text-center">' . $i->getMaHDB() . '</td>'
-                                                    . '<td class="text-center">' . $i->getNgayTao() . '</td>' 
-                                                    . '<td class="text-center">' . $i->getTongTienHD() . '</td>' 
-                                                    . '<td class="text-center">' . $i->getMaSoThue() . '</td>'
-                                                    . '<td class="text-center">' . $i->getGhiChu() . '</td>'
-                                                    . '<td class="text-center">' . $i->getPTThanhToan() . '</td>'
-                                                    . '<td class="text-center">' . $i->getGiamGiaHD() . '</td>'
-                                                    . '<td class="text-center">' .  $trangThai . '</td>' 
-                                                          
-                                                    . "<td><a class='btn btn-success btn-xs' href='?pages=chiTietHDB&MaHDB=" . $i->getMaHDB() . "'>Xem</a>".
-                                                   ($i->getTrangThai()!='0'?"":"
-                                                   
-                                                   <a class='btn btn-danger btn-xs' href='?pages=lichSuMuaHang&page=1&huy=1&mahoadon=".$i->getMaHDB()."'>Hủy</a>
-                                                   </td>") ."
-                                                </tr>";
-                                                
-                                                
-                                               
-                                            }  
+                                                . '<td class="text-center">' . $i->getMaHDB() . '</td>'
+                                                . '<td class="text-center">' . $i->getNgayTao() . '</td>'
+                                                . '<td class="text-center">' . $i->getTongTienHD() . '</td>'
+                                                . '<td class="text-center">' . $i->getMaSoThue() . '</td>'
+                                                . '<td class="text-center">' . $i->getGhiChu() . '</td>'
+                                                . '<td class="text-center">' . $i->getPTThanhToan() . '</td>'
+                                                . '<td class="text-center">' . $i->getGiamGiaHD() . '</td>'
+                                                . '<td class="text-center">' .  $trangThai . '</td>'
+                                                . "<td><a class='btn btn-success btn-xs' href='?pages=chiTietHDB&MaHDB=" . $i->getMaHDB() . "'>Xem</a>"
+                                                . ($i->getTrangThai() != '0' ? "" : " <a class='btn btn-danger btn-xs' href='?pages=lichSuMuaHang&page=$currentPage&huy=1&mahoadon=" . $i->getMaHDB() . "'>Hủy</a> </td>") // Truyền $currentPage
+                                                . " </tr>";
+                                            }
                                             ?>
-                                           
+
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 text-center">
                                         <ul class="pagination">
-                                            <!-- --------------------------------Phân trang----------------------------------- -->
-                                             <?php
-                                             $n = round($HDB->sumPage()/10);
-                                            echo '<li><a href="?pages=lichSuMuaHang&page=' .( $currentPage>=2?$currentPage-1:$currentPage) . '"> <</a></li>';
-                                            for ($i = 1; $i <= ($n) ;$i++){
-                                                $str = '<li><a href="?pages=lichSuMuaHang&page=' . $i . '">' . $i . '</a></li>';
-                                                if($i>5&& $i<$n){
-                                                    $str = '<li>...</li>';
-                                                    $str = '<li><a href="?pages=lichSuMuaHang&page=' . $n . '">' . $n . '</a></li>';
-                                                    echo $str;
-                                                    break;
+                                            <!-- Phân trang -->
+                                            <?php
+                                            for ($i = 1; $i <= $totalPages; $i++) {
+                                                $link = '<li><a href="?pages=lichSuMuaHang&page=' . $i . '">' . $i . '</a></li>';
+                                                if ($i == $currentPage) {
+                                                    $link = '<li class="active">' . $link . '</li>';
                                                 }
-                                                echo $str;
+                                                echo $link;
                                             }
-                                            echo '<li><a href="?pages=lichSuMuaHang&page=' . ($currentPage>= $n?$currentPage:$currentPage+1). '">></a></li>'; 
-                                            ?> 
+                                            ?>
                                         </ul>
                                     </div>
                                 </div>
