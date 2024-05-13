@@ -260,6 +260,7 @@ session_start();
     <script src=" ../../assets/public/js/search-quick.js "></script>
     <script src=" ../../assets/public/js/custom-owl.js "></script>
     <script src=" ../../assets/public/js/jquery.flexslider.js "></script>
+
     <div class=' scrolltop'>
         <div class='scroll icon'><i class=" fa fa-4x fa-angle-up "></i></div>
     </div>

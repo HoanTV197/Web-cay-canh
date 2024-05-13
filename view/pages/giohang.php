@@ -3,6 +3,7 @@
  <script>
     this.genderHTMLCart()
 </script>
+
 <?php 
 include_once '../../database/DB.php';
 include_once '../../model/SanPham.php';
@@ -89,7 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                              <tbody id="body-cart">
                              </tbody>
                          </table>
-                         <button class="btn "> <a href="/btlPHP/view/pages/index.php?pages=sanpham&page=1">Tiếp tục mua hàng</a></button>
+                         <button class="btn ">
+                             <a href="/view/pages/index.php?pages=trangchu">Tiếp tục mua hàng</a></button>
                      </div>
 
                      <div class="col-xs-12 col-sm-12 col-md-4 ">
