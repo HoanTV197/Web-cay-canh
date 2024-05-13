@@ -66,7 +66,7 @@
                                                 echo $str = '<tr>'
                                                 . '<td class="text-center">' . $i->getMaHDB() . '</td>'
                                                 . '<td class="text-center">' . $i->getNgayTao() . '</td>'
-                                                . '<td class="text-center">' . $i->getTongTienHD() . '</td>'
+                                                . '<td class="text-center">' . number_format((int)$i->getTongTienHD(), 0, ",", ".") . '.000 VND</td>'
                                                 . '<td class="text-center">' . $i->getMaSoThue() . '</td>'
                                                 . '<td class="text-center">' . $i->getGhiChu() . '</td>'
                                                 . '<td class="text-center">' . $i->getPTThanhToan() . '</td>'

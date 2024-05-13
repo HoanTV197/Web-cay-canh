@@ -53,7 +53,7 @@
                                             echo '<tr>';
                                             echo '<td class="text-center">' . $hoaDon->getMaHDB() . '</td>';
                                             echo '<td class="text-center">' . $hoaDon->getNgayTao() . '</td>';
-                                            echo '<td class="text-center">' . $hoaDon->getTongTienHD() . '</td>';
+                                            echo '<td class="text-center">' . number_format((int)$hoaDon->getTongTienHD(), 0, ",", ".") . '.000 VND</td>';
                                             echo '<td class="text-center">' . $hoaDon->getMaSoThue() . '</td>';
                                             echo '<td class="text-center">' . $hoaDon->getGhiChu() . '</td>';
                                             echo '<td class="text-center">' . $hoaDon->getPTThanhToan() . '</td>';

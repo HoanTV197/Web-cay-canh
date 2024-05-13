@@ -69,7 +69,7 @@ $totalPage = $HDB->totalPage('0'); // Tính tổng số trang hóa đơn chờ x
                                     echo '<tr>';
                                     echo '<td class="text-center">' . $i->getMaHDB() . '</td>';
                                     echo '<td class="text-center">' . $i->getNgayTao() . '</td>';
-                                    echo '<td class="text-center">' . $i->getTongTienHD() . '</td>';
+                                    echo '<td class="text-center">' . number_format((int)$i->getTongTienHD(), 0, ",", ".") . '.000 VND</td>';
                                     echo '<td class="text-center">' . $i->getMaSoThue() . '</td>';
                                     echo '<td class="text-center">' . $i->getGhiChu() . '</td>';
                                     echo '<td class="text-center">' . $i->getPTThanhToan() . '</td>';
