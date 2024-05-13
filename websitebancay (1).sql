@@ -254,14 +254,13 @@ INSERT INTO `nhanvien` (`MaNV`, `TenNV`, `Phone`, `NgaySinh`, `GioiTinh`, `ChucV
 
 --
 -- Cấu trúc bảng cho bảng `sanpham`
---
 
 CREATE TABLE `sanpham` (
   `MaSP` char(250) NOT NULL,
   `MaLoai` char(250) DEFAULT NULL,
   `TenSP` varchar(150) DEFAULT NULL,
-  `DonGiaBan` decimal(10,2) DEFAULT NULL,
-  `DonGiaNhap` decimal(10,2) DEFAULT NULL,
+  `DonGiaBan` decimal(10,3) DEFAULT NULL,
+  `DonGiaNhap` decimal(10,3) DEFAULT NULL,
   `NgayNhap` datetime DEFAULT NULL,
   `ThoiGianBH` decimal(10,2) DEFAULT NULL,
   `MoTaSP` varchar(250) DEFAULT NULL,
@@ -275,21 +274,21 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`MaSP`, `MaLoai`, `TenSP`, `DonGiaBan`, `DonGiaNhap`, `NgayNhap`, `ThoiGianBH`, `MoTaSP`, `donViTinh`, `AnhDaiDien`, `GhiChu`) VALUES
-('SP001', 'Loai001', 'Cây cỏ mini', '30.00', '25.00', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '1.jpg', 'Mô tả sản phẩm 1'),
-('SP002', 'Loai001', 'Cây phát tài', '25.00', '15.00', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '2.jpg', 'Mô tả sản phẩm 2'),
-('SP003', 'Loai001', 'Bonsai cây cỏ', '50.00', '30.00', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '3.jpg', 'Mô tả sản phẩm 3'),
-('SP004', 'Loai002', 'Hoa hướng dương', '50.00', '12.00', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '4.jpg', 'Mô tả sản phẩm 4'),
-('SP005', 'Loai002', 'Hoa tulip', '40.00', '14.00', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '5.jpg', 'Mô tả sản phẩm 5'),
-('SP006', 'Loai002', 'Hoa cúc trắng', '60.00', '10.00', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '6.jpg', 'Mô tả sản phẩm 6'),
-('SP007', 'Loai002', 'Hoa hồng đỏ', '45.00', '15.00', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '7.jpg', 'Mô tả sản phẩm 7'),
-('SP008', 'Loai002', 'Hoa lan hồ điệp', '40.00', '18.00', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '8.jpg', 'Mô tả sản phẩm 8'),
-('SP009', 'Loai001', 'Cây cây xanh', '35.00', '28.00', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '9.jpg', 'Mô tả sản phẩm 9'),
-('SP010', 'Loai001', 'Cây trang trí', '25.00', '20.00', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '10.jpg', 'Mô tả sản phẩm 10'),
-('SP011', 'Loai002', 'Hoa hồng đỏ', '45.00', '15.00', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '7.jpg', 'Mô tả sản phẩm 7'),
-('SP012', 'Loai002', 'Hoa lan hồ điệp', '40.00', '18.00', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '8.jpg', 'Mô tả sản phẩm 8'),
-('SP013', 'Loai004', 'Chậu cây đẹp', '35.00', '28.00', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '9.jpg', 'Mô tả sản phẩm 9'),
-('SP014', 'Loai004', 'Chậu cây  trang trí', '25.00', '20.00', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '10.jpg', 'Mô tả sản phẩm 10'),
-('SP15', 'Loai001', 'ggggggg', '2.00', '2.00', '2023-11-17 00:00:00', '2.00', 'ggggggg', 'cây', '', 'ggg');
+('SP001', 'Loai001', 'Cây cỏ mini', '300.000', '250.000', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '1.jpg', 'Mô tả sản phẩm 1'),
+('SP002', 'Loai001', 'Cây phát tài', '250.000', '150.000', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '2.jpg', 'Mô tả sản phẩm 2'),
+('SP003', 'Loai001', 'Bonsai cây cỏ', '500.000', '300.000', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '3.jpg', 'Mô tả sản phẩm 3'),
+('SP004', 'Loai002', 'Hoa hướng dương', '500.000', '120.000', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '4.jpg', 'Mô tả sản phẩm 4'),
+('SP005', 'Loai002', 'Hoa tulip', '400.000', '140.000', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '5.jpg', 'Mô tả sản phẩm 5'),
+('SP006', 'Loai002', 'Hoa cúc trắng', '600.000', '100.000', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '6.jpg', 'Mô tả sản phẩm 6'),
+('SP007', 'Loai002', 'Hoa hồng đỏ', '450.000', '150.000', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '7.jpg', 'Mô tả sản phẩm 7'),
+('SP008', 'Loai002', 'Hoa lan hồ điệp', '400.000', '180.000', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '8.jpg', 'Mô tả sản phẩm 8'),
+('SP009', 'Loai001', 'Cây cây xanh', '350.000', '280.000', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '9.jpg', 'Mô tả sản phẩm 9'),
+('SP010', 'Loai001', 'Cây trang trí', '250.000', '200.000', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '10.jpg', 'Mô tả sản phẩm 10'),
+('SP011', 'Loai002', 'Hoa hồng đỏ', '450.000', '150.000', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '7.jpg', 'Mô tả sản phẩm 7'),
+('SP012', 'Loai002', 'Hoa lan hồ điệp', '400.000', '180.000', '2023-10-13 00:00:00', '10.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '8.jpg', 'Mô tả sản phẩm 8'),
+('SP013', 'Loai004', 'Chậu cây đẹp', '350.000', '280.000', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '9.jpg', 'Mô tả sản phẩm 9'),
+('SP014', 'Loai004', 'Chậu cây  trang trí', '250.000', '200.000', '2023-10-13 00:00:00', '12.00', 'Cây có nhiều kích cỡ và chủng loại theo yêu cầu của khách hàng. Nếu khách lấy số lượng cây lộc vừng có thể liên hệ với chúng tôi để được giá ưu đãi.', 'cây', '10.jpg', 'Mô tả sản phẩm 10'),
+('SP15', 'Loai001', 'Cây sen đá', '20.000', '20.000', '2023-11-17 00:00:00', '2.00', 'Cây sen đá', 'cây', '', 'ggg');
 
 -- --------------------------------------------------------
 
