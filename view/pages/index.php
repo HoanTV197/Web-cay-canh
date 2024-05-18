@@ -45,7 +45,7 @@ session_start();
                     <div id=" navbar " class=" collapse navbar-collapse ">
 
                         <ul class=" nav navbar navbar-nav pull-right " id=" nav2 ">
-                            <li><a href='./view/login/regiter.php'>Đăng ký</a></li>
+                            <!-- <li><a href='./view/pages/regiter.php'>Đăng ký</a></li> -->
                             <li><a href='http://localhost/btlPHP/index.php'>Đăng xuất</a></li>
 
 

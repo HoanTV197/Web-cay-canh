@@ -1,5 +1,5 @@
 <?php
-include_once './database/DB.php';
+include_once '../../database/DB.php';
 class RegisterController {
     public function checkUsernameExists($username) {
         $db = new DB();

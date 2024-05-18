@@ -43,10 +43,10 @@
     </div>
     <hr>
     <div class="myform">
-        <form name="form2" action="regiter.php" method="post">
+        <form name="form2" action="register.php" method="post">
             <?php
-            include './database/DB.php';
-            include './controller/RegisterController.php';
+            include '../../database/DB.php';
+            include '../../controller/RegisterController.php';
             $db = new DB();
             $registerController=new RegisterController();
             session_start();
@@ -90,8 +90,8 @@
                             $result = $db->executeSQL($sql);
                     
                             if ($result) {
-                                // Chuyển hướng người dùng đến trang khác sau khi đăng ký thành công
-                                header("Location: ./view/pages/index.php");
+                                // Chuyển hướng người dùng đến trang chủ sau khi đăng ký thành công
+                                echo "<script>alert('Đăng ký thành công. Vui lòng đăng nhập để tiếp tục.');window.location='./login.php'</script>";
                             } else {
                                 echo "Đã xảy ra lỗi khi lưu thông tin đăng ký vào SQL.";
                             }
@@ -178,7 +178,7 @@
             </div>
             <ul class="pull-right ">
                 <li><a href="./forgotPass.php" class="fright">Quên mật khẩu?</a></li>
-                <li><a href="./login.php" class="fright">Đăng nhập</a></li>
+                <li><a href="../../index.php" class="fright">Đăng nhập</a></li>
             </ul>
         </form>
     </div>

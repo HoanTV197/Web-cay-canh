@@ -23,9 +23,11 @@ class DB
         }
     }
     /*----------Hàm thực thi câu truy vấn đến csdl-------*/
-    public function executeSQL($sql)
-    {
+    public function executeSQL($sql) {
         $result = $this->conn->query($sql);
+        if ($result === FALSE) {
+            echo "Error: " . $this->conn->error;
+        }
         return $result;
     }
     /*----------Hàm đóng kết nối đến csdl-------*/

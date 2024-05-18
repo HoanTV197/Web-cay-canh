@@ -57,27 +57,25 @@
         echo "<script>alert('Bạn đã đăng xuất thành công');</script>";
     }
    
-    //Login
-    if (isset($_POST["username"])) {
-        // Lấy dữ liệu đăng nhập
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-        $kq=$login->login($username, $password);
-        if ($kq !=false) {
-            echo "<script>alert('đăng nhập thành công');".$_SESSION["username"]."'</script>";
-            $_SESSION["username"] = $kq['username'];
-            $_SESSION["password"] = $kq['password'];
-            $_SESSION["LoaiUser"] = $kq['LoaiUser'];
-           if($_SESSION["LoaiUser"]==0){
-            echo "<script>alert('đăng nhập thành công".$_SESSION["username"]."');window.location='./view/pages/index.php'</script>";
-                
-           }
-           else{
-            echo "<script>alert('đăng nhập thành công".$_SESSION["username"]."');window.location='./view/admin/admin.php'</script>";
-
-           }
+    // Login
+if (isset($_POST["username"])) {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    $kq = $login->login($username);
+    
+    if ($kq != false && password_verify($password, $kq['password'])) {
+        $_SESSION["username"] = $kq['username'];
+        $_SESSION["password"] = $kq['password'];
+        $_SESSION["LoaiUser"] = $kq['LoaiUser'];
+        if ($_SESSION["LoaiUser"] == 0) {
+            echo "<script>alert('Đăng nhập thành công " . $_SESSION["username"] . "');window.location='./view/pages/index.php'</script>";
+        } else {
+            echo "<script>alert('Đăng nhập thành công " . $_SESSION["username"] . "');window.location='./view/admin/admin.php'</script>";
         }
-    }  
+    } else {
+        echo "<script>alert('Đăng nhập thất bại. Vui lòng kiểm tra lại tên đăng nhập và mật khẩu.');</script>";
+    }
+}
     
     ?>
     <div class="container khung">
@@ -142,7 +140,7 @@
                     </div>
                     <ul class="pull-right ">
                         <li><a href="./login/forgotPass.php " class="fright ">Quên mật khẩu?</a></li>
-                        <li><a href="view/login/regiter.php" class="fright "> Đăng ký </a></li>
+                        <li><a href="./view/login/register.php" class="fright "> Đăng ký </a></li>
                     </ul>
             </form>
         </div>

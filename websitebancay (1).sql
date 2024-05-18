@@ -329,22 +329,22 @@ CREATE TABLE `user` (
 
 --
 -- Đang đổ dữ liệu cho bảng `user`
---
+-- mật khẩu : 88888888
 
 INSERT INTO `user` (`username`, `password`, `LoaiUser`) VALUES
-('admin', 'abc123', 1),
-('nhanvien1', 'abc123', 0),
-('nhanvien2', 'abc123', 0),
-('nhanvien3', 'abc123', 0),
-('nhanvien4', 'abc123', 0),
-('nhanvien5', 'abc123', 0),
-('nhanvien6', 'abc123', 0),
-('nhanvien7', 'abc123', 0),
-('nhanvien8', 'abc123', 0),
-('user1', 'abc123', 0),
-('user2', 'abc123', 0),
-('user3', 'abc123', 0),
-('user4', 'abc123', 0);
+('admin', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 1),
+('nhanvien1', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0),
+('nhanvien2', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0),
+('nhanvien3', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0),
+('nhanvien4', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0),
+('nhanvien5', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0),
+('nhanvien6', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0),
+('nhanvien7', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0),
+('nhanvien8', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0),
+('user1', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0),
+('user2', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0),
+('user3', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0),
+('user4', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ
