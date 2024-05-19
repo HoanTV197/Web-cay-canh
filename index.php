@@ -35,6 +35,75 @@
             padding-left: 11px;
             color: red;
         }
+
+        /* login.css */
+
+body {
+  font-family: sans-serif; /* Chọn font chữ hiện đại */
+  background-color: #f4f4f4; /* Màu nền nhạt */
+  display: flex; /* Sử dụng flexbox để căn giữa */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.khung {
+  background-color: #fff; /* Màu nền trắng cho khung đăng nhập */
+  padding: 30px;
+  border-radius: 10px; /* Bo góc cho khung */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng cho khung */
+}
+
+.title h2 {
+  color: #337ab7; /* Màu tiêu đề */
+}
+
+.myform {
+  display: flex;
+  flex-direction: row; /* Sắp xếp nội dung theo hàng ngang */
+  align-items: center;
+}
+
+.myform form {
+  flex: 1; /* Cho phép khung form co giãn */
+}
+
+.form-control {
+  border-radius: 5px; /* Bo góc input */
+  border: 1px solid #ccc; /* Viền input */
+}
+
+.btn-login {
+  background-color: #337ab7; /* Màu nút đăng nhập */
+  border: none;
+}
+
+.btn-login:hover {
+  background-color: #23527c; /* Màu nút khi hover */
+}
+
+.fright {
+  color: #337ab7; /* Màu liên kết */
+}
+
+/* Phần quan trọng: Thêm ảnh cây cảnh */
+.image-container {
+  width: 40%; /* Điều chỉnh độ rộng của ảnh */
+  margin-left: 20px; /* Khoảng cách giữa ảnh và form */
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px; /* Bo góc ảnh */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng cho ảnh */
+}
+
+/* Tùy chỉnh li */
+.pull-right {
+  justify-content: space-around; /* Chia đều các mục */
+}
+
     </style>
 </head> 
 
@@ -78,6 +147,8 @@ if (isset($_POST["username"])) {
 }
     
     ?>
+
+
     <div class="container khung">
         <div class="title">
             <h2 class="text-center" style="color:#337ab7">Web Cây Cảnh</h2>
