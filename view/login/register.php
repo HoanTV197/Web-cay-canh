@@ -191,7 +191,7 @@ body {
                     
                             if ($result) {
                                 // Chuyển hướng người dùng đến trang chủ sau khi đăng ký thành công
-                                echo "<script>alert('Đăng ký thành công. Vui lòng đăng nhập để tiếp tục.');window.location='./login.php'</script>";
+                                echo "<script>alert('Đăng ký thành công. Vui lòng đăng nhập để tiếp tục.');window.location.href = '../../index.php';</script>   ";
                             } else {
                                 echo "Đã xảy ra lỗi khi lưu thông tin đăng ký vào SQL.";
                             }
