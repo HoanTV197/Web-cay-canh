@@ -24,7 +24,6 @@ if (isset($_GET['excel'])) {
         case "banExcel":
             include_once './baocao/banExcel.php';
             break;
-           
     }
 }
 ?>
@@ -34,7 +33,7 @@ if (isset($_GET['excel'])) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Danh sách </title>
+    <title>Danh sách</title>
     <link rel="icon" type="image/x-icon" href="../../assets/public/images/iconu.png">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -46,8 +45,6 @@ if (isset($_GET['excel'])) {
     <link rel="stylesheet" href="../../assets/public/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../assets/public/css/AdminLTE.css">
-    <link rel="stylesheet" href="../../assets/public/css/ionicons.min.css">
-
     <link rel="stylesheet" href="../../assets/public/css/_all-skins.min.css">
     <script src="../../assets/public/js/loader.js"></script>
     <script src="../../assets/public/ckeditor/ckeditor.js"></script>
@@ -84,46 +81,93 @@ if (isset($_GET['excel'])) {
         }
 
         .pagination li:hover a {
-
             text-decoration: underline;
+        }
+
+        .main-header .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .main-sidebar {
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu>li>a {
+            font-size: 1.1em;
+        }
+
+        .sidebar-menu .header {
+            font-size: 1.2em;
+            color: #4b646f;
+        }
+
+        .main-sidebar .sidebar-menu .treeview-menu>li>a {
+            font-size: 1em;
+        }
+
+        .sidebar-mini.sidebar-collapse .main-sidebar {
+            width: 50px !important;
+        }
+
+        .sidebar-mini.sidebar-collapse .main-sidebar .sidebar-menu>li>a>.fa,
+        .sidebar-mini.sidebar-collapse .main-sidebar .sidebar-menu>li>a>span {
+            display: inline-block;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .sidebar-mini.sidebar-collapse .main-sidebar .sidebar-menu>li>a>span {
+            display: none;
+        }
+
+        .sidebar-mini.sidebar-collapse .main-sidebar .sidebar-menu>li>.treeview-menu {
+            display: none !important;
+        }
+
+        .sidebar-mini.sidebar-collapse .main-sidebar #toggleSidebarBtn .fa-angle-left {
+            display: none;
+        }
+
+        .sidebar-mini.sidebar-collapse .main-sidebar #toggleSidebarBtn .fa-angle-right {
+            display: inline-block;
+        }
+
+        .main-footer {
+            text-align: center;
+        }
+
+        #toggleSidebarBtn .fa-angle-right {
+            display: none;
         }
     </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <div class="wrapper">
-        <!-- Vung Header -->
+        <!-- Vùng Header -->
         <header class="main-header">
-            <a href="./admin" class="logo">
-                <span class="logo-lg">Quản trị hệ thống</span>
+            <a href="#" class="logo">
+                <span class="logo-lg">ADMIN</span>
             </a>
             <nav class="navbar navbar-static-top" style="height: 52px">
-                <a href="#" data-toggle="offcanvas" role="button" style="position: absolute;top: 38%;
-    left: 1.5%;
-    background: url('../../assets/public/images/admin/Sprites.64af8f61.svg') no-repeat -847px -35px;
-    width: 16px;
-    height: 14px;">
-                    <!-- <span class="sr-only">Toggle navigation</span> -->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav" style="height: 52px;  padding: 1px">
                         <li class="dropdown notifications-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o" style="position:absolute;
-    background: url('../../assets/public/images/admin/Sprites.64af8f61.svg') no-repeat -788px -30px;right: 54%;
-    width: 22px;
-	height: 25px;"></i>
-                                <span class="label label-warning">
-                                    2 </span>
+                                <i class="fa fa-bell-o" style="position:absolute; background: url('../../assets/public/images/admin/Sprites.64af8f61.svg') no-repeat -788px -30px;right: 54%; width: 22px; height: 25px;"></i>
+                                <span class="label label-warning">2</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <ul class="menu">
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-users text-aqua"></i>
-                                                2
-                                                Đơn hàng chưa duyệt
+                                                <i class="fa fa-users text-aqua"></i> 2 Đơn hàng chưa duyệt
                                             </a>
                                         </li>
                                     </ul>
@@ -132,9 +176,7 @@ if (isset($_GET['excel'])) {
                                     <ul class="menu">
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-users text-aqua"></i>
-                                                0
-                                                Đơn hàng đang giao
+                                                <i class="fa fa-users text-aqua"></i> 0 Đơn hàng đang giao
                                             </a>
                                         </li>
                                     </ul>
@@ -142,11 +184,11 @@ if (isset($_GET['excel'])) {
                                 <li class="footer"><a href="./admin/orders">Xem</a></li>
                             </ul>
                         </li>
-                        <li style="height: 52px">
+                        <!-- <li style="height: 52px">
                             <a target="_blank" href="./">
                                 <span>Website</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="dropdown user user-menu" style="height: 52px; padding: 0px">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../../assets/public/images/admin/anh-kh.jpg" class="user-image" alt="User Image">
@@ -159,11 +201,10 @@ if (isset($_GET['excel'])) {
                                 </li>
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="./admin/useradmin/update/1" class="btn btn-default btn-flat">Chi
-                                            tiết</a>
+                                        <a href="./admin/useradmin/update/1" class="btn btn-default btn-flat">Chi tiết</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="admin/user/logout.html" class="btn btn-default btn-flat">Thoát</a>
+                                        <a href="../../index.php" class="btn btn-default btn-flat">Thoát</a>
                                     </div>
                                 </li>
                             </ul>
@@ -172,18 +213,11 @@ if (isset($_GET['excel'])) {
                 </div>
             </nav>
         </header>
-
-        <!-- ./Vung Header -->
+        <!-- ./Vùng Header -->
         <aside class="main-sidebar">
-
             <section class="sidebar">
-                <ul class="sidebar-menu">
+                <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">THỐNG KÊ</li>
-                    <li class="treeview">
-                        <a href="?admin=thongKeNhap">
-                            <i class="fa fa-bar-chart"></i> <span>Thống kê nhập</span>
-                        </a>
-                    </li>
                     <li class="treeview">
                         <a href="?admin=baoCaoDoanhThu">
                             <i class="fa fa-bar-chart"></i> <span>Thống kê doanh thu</span>
@@ -191,71 +225,74 @@ if (isset($_GET['excel'])) {
                     </li>
                     <li class="treeview">
                         <a href="?admin=khachHangTN&page=1">
-                            <i class="fa fa-bar-chart"></i> <span>Thống kê khách hàng tiềm năng</span>
+                            <i class="fa fa-users"></i> <span>Thống kê khách tiềm năng</span>
                         </a>
                     </li>
                     <li class="header">QUẢN LÝ CỬA HÀNG</li>
                     <li class="treeview">
                         <a href="?admin=hienThiTinTuc&page=1">
-                            <span>Tin tức</span>
+                            <i class="fa fa-newspaper"></i> <span>Tin tức</span>
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="?admin=hienThiSanPham&page=1">
-                            <span>Sản phẩm</span>
+                            <i class="fa fa-box"></i> <span>Sản phẩm</span>
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="?admin=hienThiLoai&page=1">
-                            <span>Loại sản phẩm</span>
+                            <i class="fa fa-tags"></i> <span>Loại sản phẩm</span>
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="?admin=hienThiNCC&page=1">
-                            <span>Nhà cung cấp</span>
+                            <i class="fa fa-truck"></i> <span>Nhà cung cấp</span>
                         </a>
                     </li>
                     <li class="header">QUẢN LÝ NGƯỜI DÙNG</li>
-
                     <li class="treeview">
                         <a href="?admin=hienThiTaiKhoan&page=1">
-                            <i class="fa fa-envelope"></i> <span>Tài khoản</span>
+                            <i class="fa fa-user-circle"></i> <span>Tài khoản</span>
                         </a>
                     </li>
-
                     <li class="treeview">
                         <a href="?admin=hienThiKhachHang&page=1">
-                            <i class="fa fa-user"></i><span>Khách hàng</span>
+                            <i class="fa fa-users"></i> <span>Khách hàng</span>
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="?admin=hienThiNhanVien&page=1">
-                            <i class="fa fa-user"></i><span>Nhân viên</span>
+                            <i class="fa fa-user-tie"></i> <span>Nhân viên</span>
                         </a>
                     </li>
-
-                    <li class="header">Quản LÝ ĐƠN HÀNG</li>
+                    <li class="header">QUẢN LÝ ĐƠN HÀNG</li>
                     <li class="treeview">
                         <a href="?admin=hienThiHoaDonNhap&page=1">
-                            <i class="fa fa-user"></i><span>Hóa đơn nhập</span>
+                            <i class="fa fa-file-invoice"></i> <span>Hóa đơn nhập</span>
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="?admin=hienThiHoaDonBanXN&page=1">
-                            <i class="fa fa-user"></i><span>Danh sách hóa đơn chờ xác nhận</span>
+                            <i class="fa fa-file-invoice"></i> <span>Hóa đơn chờ xác nhận</span>
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="?admin=hienThiHoaDonBanHT&page=1">
-                            <i class="fa fa-user"></i><span>Danh sách hóa đơn hoàn tất</span>
+                            <i class="fa fa-file-invoice"></i> <span>Hóa đơn hoàn tất</span>
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="?admin=hienThiHoaDonBanHUY&page=1">
-                            <i class="fa fa-user"></i><span>Danh sách hóa đơn hủy</span>
+                            <i class="fa fa-file-invoice"></i> <span>hóa đơn hủy</span>
                         </a>
                     </li>
-                    <li><a href="admin/user/logout.html"><i class="fa fa-sign-out text-red"></i> <span>Thoát</span></a>
+                    <li><a href="../../index.php"><i class="fa fa-sign-out text-red"></i> <span>Thoát</span></a></li>
+                    <!-- Nút thu gọn sidebar, chỉ hiển thị các icon -->
+                    <li>
+                        <a href="#" id="toggleSidebarBtn">
+                            <i class="fa fa-angle-right"></i>
+                            <i class="fa fa-angle-left"></i>
+                        </a>
                     </li>
                 </ul>
             </section>
@@ -266,14 +303,30 @@ if (isset($_GET['excel'])) {
         ?>
 
         <!-- /.coupon-wrapper -->
+             <!-- Hiện thị footer ở cuối trang website chứa thông tin về bản quyền    -->
+     <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 1.0
+            </div>
+            <strong>2024 &copy; <a href="https://www.facebook.com/v.hzuong23">Vũ Thị Hường</a>.</strong> All rights reserved.
+        </footer>
+        <!-- ./footer -->
     </div>
+
+
     <!-- ./wrapper -->
     <!-- jQuery 2.2.3 -->
     <script src="../../assets/public/js/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
     <script src="../../assets/public/js/bootstrap.js"></script>
     <!-- AdminLTE App -->
-    <script src="../../assets/public/js/app.min.js"></script>
+    <script src="../../assets/public/js/adminlte.min.js"></script>
+    <script>
+        $('#toggleSidebarBtn').click(function () {
+            $('body').toggleClass('sidebar-collapse');
+            $('#toggleSidebarBtn .fa-angle-left, #toggleSidebarBtn .fa-angle-right').toggle();
+        });
+    </script>
 </body>
 
 </html>

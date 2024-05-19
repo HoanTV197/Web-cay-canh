@@ -346,6 +346,15 @@ INSERT INTO `user` (`username`, `password`, `LoaiUser`) VALUES
 ('user3', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0),
 ('user4', '$2y$10$j2gt8CIYn16rFXOg3pj1j.eaw.C5rnGcLb7nToPEa5IdRRgYAFNO.', 0);
 
+
+--bảng quên mật khẩu
+CREATE TABLE password_reset (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    expires INT NOT NULL
+);
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --

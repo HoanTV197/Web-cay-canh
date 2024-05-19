@@ -139,7 +139,7 @@ if (isset($_POST["username"])) {
 
                     </div>
                     <ul class="pull-right ">
-                        <li><a href="./login/forgotPass.php " class="fright ">Quên mật khẩu?</a></li>
+                        <li><a href=" ./view/login/forgotpassword.php" class="fright ">Quên mật khẩu?</a></li>
                         <li><a href="./view/login/register.php" class="fright "> Đăng ký </a></li>
                     </ul>
             </form>

@@ -33,6 +33,106 @@
             padding-left: 11px;
             color: red;
         }
+
+        /* Đặt trong file register.css hoặc trong style tag trong head của file register.php */
+
+/* Body và toàn bộ trang */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Title */
+.title h2 {
+    font-size: 24px;
+    color: #337ab7;
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+.myform {
+    margin-top: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.input-group-addon {
+    padding: 10px 15px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    color: #555;
+}
+
+.form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0 4px 4px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Buttons */
+.btn-login {
+    background-color: #337ab7;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #286090;
+}
+
+/* Notification styling */
+.notifi {
+    color: red;
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+/* Link styling */
+.pull-right {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.pull-right li {
+    list-style: none;
+    padding: 5px;
+}
+
+.pull-right li a {
+    text-decoration: none;
+    color: #337ab7;
+    transition: color 0.3s;
+}
+
+.pull-right li a:hover {
+    color: #23527c;
+}
+
     </style>
 </head>
 
@@ -48,7 +148,7 @@
             include '../../database/DB.php';
             include '../../controller/RegisterController.php';
             $db = new DB();
-            $registerController=new RegisterController();
+            $registerController = new RegisterController();
             session_start();
             $sql = "SELECT COUNT(*) AS total FROM khachhang";
             $result1 = $db->executeSQL($sql);
