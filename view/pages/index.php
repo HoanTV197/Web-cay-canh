@@ -46,7 +46,9 @@ session_start();
 
                         <ul class=" nav navbar navbar-nav pull-right " id=" nav2 ">
                             <!-- <li><a href='./view/pages/regiter.php'>Đăng ký</a></li> -->
-                            <li><a href='http://localhost/btlPHP/index.php'>Đăng xuất</a></li>
+                            <!-- <li><a href='http://localhost/btlPHP/index.php'>Đăng xuất</a></li> -->
+                            <!-- chuyển hướng về trang đăng nhập sau khi ấn đăng xuất -->
+                            <li><a href='../../index.php'>Đăng xuất</a></li>
 
 
                         </ul>
