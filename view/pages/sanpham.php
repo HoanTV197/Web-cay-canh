@@ -21,6 +21,8 @@ $listsp1 = $sp->getAllProduct1();
         background-color: #0ce90a;
         border: none;
     }
+
+    
 </style>
 <section id=" product-all " class=" collection ">
     <div class=" banner-product ">
@@ -41,30 +43,30 @@ $listsp1 = $sp->getAllProduct1();
 
                     <ul class="main-ul ">
                         <li>
-                            <a href='san-pham/cay-canh-ngoai-that ' title=' Cây cảnh ngoại thất'>Cây cảnh ngoại thất<i
+                            <a href='#' title=' Cây cảnh ngoại thất'>Cây cảnh ngoại thất<i
                                     class="fa fa-angle-right pull-right " aria-hidden=" true "></i></a>
                             <ul class="sub ">
                                 <li>
-                                    <a href='san-pham/cay-canh-nghe-thuat ' title=' Cây cảnh nghệ thuật '> Cây cảnh nghệ
+                                    <a href='#' title=' Cây cảnh nghệ thuật '> Cây cảnh nghệ
                                         thuật
 
                                     </a>
                                 </li>
-                                <li><a href='san-pham/cay-canh-vuon ' title=' Cây cảnh vườn '> Cây cảnh vườn</a></li>
+                                <li><a href='#' title=' Cây cảnh vườn '> Cây cảnh vườn</a></li>
                             </ul>
                         </li>
-                        <li><a href='san-pham/cay-canh-noi-that ' title=' Cây cảnh nội thất'>Cây cảnh nội thất<i
+                        <li><a href='#' title=' Cây cảnh nội thất'>Cây cảnh nội thất<i
                                     class="fa fa-angle-right pull-right " aria-hidden=" true "></i></a>
                             <ul class=" sub ">
-                                <li><a href='san-pham/ua-chuong-trong-nha ' title=' Ưa chuộng trong nhà '> Ưa chuộng
+                                <li><a href='#' title=' Ưa chuộng trong nhà '> Ưa chuộng
                                         trong nhà</a></li>
-                                <li><a href='san-pham/cay-canh-de-ban ' title=' Cây cảnh để bàn '> Cây cảnh để bàn</a>
+                                <li><a href='#' title=' Cây cảnh để bàn '> Cây cảnh để bàn</a>
                                 </li>
-                                <li><a href='san-pham/cay-canh-van-phong ' title=' Cây cảnh văn phòng '> Cây cảnh văn
+                                <li><a href='#' title=' Cây cảnh văn phòng '> Cây cảnh văn
                                         phòng</a></li>
                             </ul>
                         </li>
-                        <li><a href='san-pham/cay-giong ' title=' Cây giống'>Cây giống</i></a></li>
+                        <li><a href='#' title=' Cây giống'>Cây giống</i></a></li>
                     </ul>
                 </div>
                 <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 products-sale-off ">
