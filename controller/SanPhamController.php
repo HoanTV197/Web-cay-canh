@@ -49,17 +49,30 @@ class SanPhamController
      * $numberPage : index page đầu vd: lấy 10->20 thì index page sẽ là 10
      * $record_page: số lượng sản phẩm của mỗi page
      */
-    public function getAllProduct($page)
+    public function getAllProduct($page, $sort)
     {
-        //khởi tạo database và kết nối
         $db = new DB();
         $record_page = 8;
         $numberPage = ($page - 1) * $record_page;
-        //câu lện sql cần thực thi
-        $sql = "SELECT * FROM sanpham LIMIT $numberPage, $record_page;";
+    
+        // Define sorting options
+        $sortOptions = [
+            'number_buy-desc' => 'SoLuongBan DESC',
+            'name-asc' => 'TenSP ASC',
+            'name-desc' => 'TenSP DESC',
+            'price-asc' => 'DonGiaBan ASC',
+            'price-desc' => 'DonGiaBan DESC',
+            'created-desc' => 'NgayNhap DESC',
+            'created-asc' => 'NgayNhap ASC'
+        ];
+    
+        // Default to 'name-asc' if sort is not in the options
+        $orderBy = isset($sortOptions[$sort]) ? $sortOptions[$sort] : 'TenSP ASC';
+    
+        $sql = "SELECT * FROM sanpham ORDER BY $orderBy LIMIT $numberPage, $record_page;";
         $result = $db->executeSQL($sql);
-
-        //push các bản ghi vào listProduct
+    
+        $this->listProduct = [];
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 array_push($this->listProduct, new SanPham(
@@ -79,9 +92,10 @@ class SanPhamController
         } else {
             echo "Không có sản phẩm nào.";
         }
-
+    
         return $this->listProduct;
     }
+    
     public function getAllProduct1()
     {
 

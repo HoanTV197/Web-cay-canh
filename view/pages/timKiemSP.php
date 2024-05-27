@@ -7,7 +7,7 @@ $tenSP = $_POST['TenSP'];
 //lấy danh sách sản phẩm
 $sp = new SanPhamController();
 //danh sách sản phẩm phân trang
-$listsp = $sp->getAllProduct($currentPage);
+$listsp = $sp->getAllProduct($currentPage, $sort);
 //danh sách sản phẩm không phân trang
 $listsp1 = $sp->getAllProduct1();
 //Lấy loại sản phẩm
@@ -77,7 +77,7 @@ $listspTK = $sp->timKiemSanPham($tenSP);
                                         <a class='ws-nw overflow ellipsis' href=cay-lan-hat-dua title=' Cây Lan Hạt Dưa'>".$listsp1[$i]->getTenSP()."</a>
                                         </div>
                                         <ul class='entry-meta'>
-                                            <li class='color '><ins>".$listsp1[$i]->getDonGiaBan()."0₫</ins><del>".($listsp1[$i]->getDonGiaBan()+10).",000₫</del></li>
+                                            <li class='color '><ins>".$listsp1[$i]->getDonGiaBan().",000₫</ins><del>".($listsp1[$i]->getDonGiaBan()+10).",000₫</del></li>
                                         </ul>
                                         <div>
                                         </div>
