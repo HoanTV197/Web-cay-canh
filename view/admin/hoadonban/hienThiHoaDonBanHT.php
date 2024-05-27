@@ -38,7 +38,7 @@
                                     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
                                     // Lấy tổng số trang
-                                    $totalPage = $hdbController->totalPage('2'); // Chỉ lấy hóa đơn hoàn tất (trạng thái 2)
+                                    $totalPage = $hdbController->totalPage([2,5]); // Chỉ lấy hóa đơn hoàn tất (trạng thái 2)
 
                                     // Đảm bảo trang hiện tại hợp lệ
                                     if ($currentPage > $totalPage) {
@@ -46,7 +46,8 @@
                                     }
 
                                     // Lấy danh sách hóa đơn hoàn tất (trạng thái 2) cho trang hiện tại
-                                    $listHDB = $hdbController->listHDB($currentPage, '2');
+                                    $listHDB = $hdbController->listHDB($currentPage, [2,5]); 
+
 
                                     if (empty($listHDB)) {
                                         echo "<tr><td colspan='9' class='text-center'>Không có hóa đơn nào</td></tr>";

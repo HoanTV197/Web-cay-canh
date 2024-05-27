@@ -277,15 +277,26 @@ if (isset($_GET['excel'])) {
                         </a>
                     </li>
                     <li class="treeview">
+                        <a href="?admin=choGiaoHang&page=1">
+                            <i class="fa fa-truck-loading"></i> <span>Hóa đơn chờ giao hàng</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="?admin=dangGiaoHang&page=1">
+                            <i class="fa fa-shipping-fast"></i> <span>Hóa đơn đang giao hàng</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
                         <a href="?admin=hienThiHoaDonBanHT&page=1">
                             <i class="fa fa-file-invoice"></i> <span>Hóa đơn hoàn tất</span>
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="?admin=hienThiHoaDonBanHUY&page=1">
-                            <i class="fa fa-file-invoice"></i> <span>hóa đơn hủy</span>
+                            <i class="fa fa-file-invoice"></i> <span>Hóa đơn hủy</span>
                         </a>
                     </li>
+                
                     <li><a href="../../index.php"><i class="fa fa-sign-out text-red"></i> <span>Thoát</span></a></li>
                     <!-- Nút thu gọn sidebar, chỉ hiển thị các icon -->
                     <li>

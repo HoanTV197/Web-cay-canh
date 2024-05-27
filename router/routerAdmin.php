@@ -94,6 +94,12 @@ if (isset($_GET["admin"])) {
         case "suaHDB":
             include "./hoadonban/suaHoaDonBan.php";
             break;
+        case 'choGiaoHang':
+            include './hoadonban/choGiaoHang.php';
+            break;
+        case 'dangGiaoHang':
+                include './hoadonban/dangGiaoHang.php';
+                break;    
             /*----------------Quản lý tin tức----------*/
         case "hienThiTinTuc":
             include "./tintuc/hienThiTinTuc.php";

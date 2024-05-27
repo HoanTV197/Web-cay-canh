@@ -44,7 +44,7 @@
                                         $currentPage = 1;
                                     }
                                     
-                                    $listHDB = $hdbController->listHDB($currentPage, '1'); // Lấy danh sách hóa đơn hủy (trạng thái 1)
+                                    $listHDB = $hdbController->listHDB($currentPage, [1]); // Lấy danh sách hóa đơn hủy (trạng thái 1)
 
                                     if (empty($listHDB)) {
                                         echo "<tr><td colspan='8' class='text-center'>Không có hóa đơn nào</td></tr>";
