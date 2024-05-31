@@ -11,33 +11,33 @@ if (isset($_GET['action'], $_GET['MaHDB'])) {
     $message = '';
 
     switch ($action) {
-        case 'xacnhan':
-            $trangThai = 3; // Chờ lấy hàng
-            $message = 'Xác nhận đơn hàng thành công';
+        case 'dagiao':
+            $trangThai = 5; // Đã giao hàng
+            $message = 'Đơn hàng đã giao thành công';
             break;
-        case 'huy':
-            $trangThai = 1; // Đã hủy
-            $message = 'Hủy đơn hàng thành công';
+        case 'thatbai':
+            $trangThai = 6; // Giao hàng thất bại
+            $message = 'Giao hàng thất bại';
             break;
         default:
             $message = 'Không có hành động nào được thực hiện';
     }
 
     if ($HDB->updateHDB($maHDB, $trangThai)) {
-        echo "<script>alert('$message'); window.location.href = '?admin=hienThiHoaDonBanXN&page=$currentPage';</script>";
+        echo "<script>alert('$message'); window.location.href = '?admin=dangGiaoHang&page=$currentPage';</script>";
         exit;
     } else {
         echo "<script>alert('Cập nhật trạng thái thất bại');</script>";
     }
 }
 
-$listHDB = $HDB->listHDB($currentPage, [0]);
-$totalPage = $HDB->totalPage('0');
+$listHDB = $HDB->listHDB($currentPage, [4]);
+$totalPage = $HDB->totalPage('4');
 ?>
 
 <div class="content-wrapper">
     <section class="content-header">
-        <h1>Danh sách hóa đơn chờ xác nhận</h1>
+        <h1>Danh sách hóa đơn đang giao hàng</h1>
     </section>
     <section class="content">
         <div class="row">
@@ -74,10 +74,10 @@ $totalPage = $HDB->totalPage('0');
                                             echo '<td class="text-center">' . $i->getGhiChu() . '</td>';
                                             echo '<td class="text-center">' . $i->getPTThanhToan() . '</td>';
                                             echo '<td class="text-center">' . $i->getGiamGiaHD() . '</td>';
-                                            echo '<td class="text-center">Chờ xác nhận</td>';
+                                            echo '<td class="text-center">Đang giao hàng</td>';
                                             echo "<td>
-                                                    <a class='btn btn-success btn-xs' href='?admin=hienThiHoaDonBanXN&MaHDB={$i->getMaHDB()}&action=xacnhan&page=$currentPage'>Xác nhận</a>
-                                                    <a class='btn btn-danger btn-xs' href='?admin=hienThiHoaDonBanXN&MaHDB={$i->getMaHDB()}&action=huy&page=$currentPage'>Hủy</a>
+                                                    <a class='btn btn-success btn-xs' href='?admin=dangGiaoHang&MaHDB={$i->getMaHDB()}&action=dagiao&page=$currentPage'>Đã giao</a>
+                                                    <a class='btn btn-danger btn-xs' href='?admin=dangGiaoHang&MaHDB={$i->getMaHDB()}&action=thatbai&page=$currentPage'>Thất bại</a>
                                                   </td>";
                                             echo '</tr>';
                                         }
@@ -92,7 +92,7 @@ $totalPage = $HDB->totalPage('0');
                                     <?php
                                     for ($i = 1; $i <= $totalPage; $i++) {
                                         $activeClass = ($i == $currentPage) ? 'active' : '';
-                                        echo "<li class='$activeClass'><a href='?admin=hienThiHoaDonBanXN&page=$i'>$i</a></li>";
+                                        echo "<li class='$activeClass'><a href='?admin=dangGiaoHang&page=$i'>$i</a></li>";
                                     }
                                     ?>
                                 </ul>

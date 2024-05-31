@@ -61,18 +61,23 @@ class HoaDonBanController
     }
 
     /*----------------Lấy danh sách hóa đơn bán -------------*/
-    public function listHDB($page, $trangThai = null)
-    {
-        $db = new DB();
-        $record_page = 5;
-        $numberPage = ($page - 1) * $record_page;
-        $sql = "SELECT * FROM HoaDonBan";
-    
-        if ($trangThai !== null) {
+    public function listHDB($page, $trangThai = null) 
+{
+    $db = new DB();
+    $record_page = 5;
+    $numberPage = ($page - 1) * $record_page;
+    $sql = "SELECT * FROM HoaDonBan";
+
+    if ($trangThai !== null) {
+        if (is_array($trangThai)) { // Nếu $trangThai là mảng (nhiều trạng thái)
+            $trangThaiStr = implode(',', $trangThai);
+            $sql .= " WHERE TrangThai IN ($trangThaiStr)";
+        } else { // Nếu $trangThai là một giá trị duy nhất
             $sql .= " WHERE TrangThai = '$trangThai'";
         }
-    
-        $sql .= " LIMIT $numberPage, $record_page;";
+    }
+
+    $sql .= " LIMIT $numberPage, $record_page;";
         
         $result = $db->executeSQL($sql);
         //push các bản ghi vào list hóa đơn bán
@@ -99,20 +104,32 @@ class HoaDonBanController
     }
 
     // Hàm tính tổng số trang
-    public function totalPage($trangThai = '0') { // Thêm tham số $trangThai
-        $db = new DB();
-        $sql = "SELECT COUNT(*) AS total FROM HoaDonBan WHERE TrangThai = '$trangThai'";
-        $result = $db->executeSQL($sql);
-    
-        if ($result) {
-            $row = $result->fetch_assoc();
-            $totalHoaDon = $row['total'];
-            $recordPerPage = 5;
-            return ceil($totalHoaDon / $recordPerPage);
-        } else {
-            return 1; // Hoặc một giá trị mặc định khác
+  // Hàm tính tổng số trang
+public function totalPage($trangThai = null) // Sửa đổi tham số $trangThai
+{
+    $db = new DB();
+    $sql = "SELECT COUNT(*) AS total FROM HoaDonBan";
+
+    if ($trangThai !== null) {
+        if (is_array($trangThai)) { // Nếu $trangThai là mảng
+            $trangThaiStr = implode(',', $trangThai);
+            $sql .= " WHERE TrangThai IN ($trangThaiStr)";
+        } else { // Nếu $trangThai là một giá trị duy nhất
+            $sql .= " WHERE TrangThai = '$trangThai'";
         }
     }
+
+    $result = $db->executeSQL($sql);
+
+    if ($result) {
+        $row = $result->fetch_assoc();
+        $totalHoaDon = $row['total'];
+        $recordPerPage = 5;
+        return ceil($totalHoaDon / $recordPerPage);
+    } else {
+        return 1; // Hoặc một giá trị mặc định khác
+    }
+}
     /*----------------Lấy 1 hóa đơn bán -------------*/
     public function getHDB($maHDB)
     {
