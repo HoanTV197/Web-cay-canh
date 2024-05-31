@@ -24,10 +24,12 @@ if (isset($_POST['mst'])) {
     $hdn->insertHDN($MaHDN, $NgayTao, $TongTienHD, $MaSoThue, $PTThanhToan, 'Hoàn thành', 0, $GhiChu, $MaNCC, $MaNV);
     $kq = $hdn->insertCTHDN($MaHDN, $MaCTHDN, $MaSP, $SoLuong);
     if ($kq) {
-        echo "<script>alert('Cập nhật hóa đơn thành công!');</script";
+        header("Location: admin.php?admin=hienThiHoaDonNhap&MaHDN=$MaHDN"); // Chuyển hướng kèm Mã HDN
+        exit; // Kết thúc xử lý tại đây để đảm bảo chuyển hướng ngay lập tức
     } else {
         echo "<script>alert('Cập nhật hóa đơn thất bại!');</script>";
     }
+    
 }
 
 ?>
@@ -45,7 +47,7 @@ if (isset($_POST['mst'])) {
                 <button type="submit" class="btn btn-primary btn-sm">
                     Lưu [Thêm]
                 </button>
-                <a class="btn btn-primary btn-sm" href="?admadmin=hienThiHoaDonNhap&page=1" role="button">
+                <a class="btn btn-primary btn-sm" href="?admin=hienThiHoaDonNhap&page=1" role="button">
                     Thoát
                 </a>
             </div>

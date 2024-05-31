@@ -11,58 +11,60 @@
         margin-right: 3px;
     }
 </style>
+
 <?php
 include '../../controller/HoaDonNhapController.php';
 
+// Hàm định dạng tiền tệ
+function formatCurrency($number) {
+    return number_format($number, 0, ',', '.') . '₫';
+}
+
 // lấy số trang hiện tại
-$currentPage = $_GET['page'];
-//gọi đến controller
+$currentPage = $_GET['page'] ?? 1;
+// gọi đến controller
 $hdn = new HoaDonNhapController();
 ?>
+
 <div class="content-wrapper">
     <section class="content-header">
         <h1>Danh sách hóa đơn nhập</h1>
         <?php
         $list = [];
-        if (isset($_POST['year']) ) {
+        if (isset($_POST['year'])) {
             $year = $_POST['year'];
             $month = $_POST['month'];
             $day = $_POST['day'];
-            $list=$hdn->getTimeHDN($year, $month, $day);
-        }
-        else{
+            $list = $hdn->getTimeHDN($year, $month, $day);
+        } else {
             $list = $hdn->getListHDN($currentPage);
         }
         ?>
         <div class="breadcrumb">
-
             <form action="?admin=hienThiHoaDonNhap&page=1" method="post" style="margin-right:5px;">
                 <select name="year" style="padding:5px 10px;">
                     <option value=''>year</option>"
                     <?php
                     for ($i = 2021; $i <= 2023; $i++) {
-                        echo " <option value='$i'>$i</option>";
+                        echo "<option value='$i'>$i</option>";
                     }
                     ?>
-
                 </select>
                 <select name="month" style="padding:5px 10px;">
                     <option value=''>month</option>"
                     <?php
                     for ($i = 1; $i <= 12; $i++) {
-                        echo " <option value='$i'>$i</option>";
+                        echo "<option value='$i'>$i</option>";
                     }
                     ?>
-
                 </select>
                 <select name="day" style="padding:5px 10px;">
                     <option value=''>day</option>"
                     <?php
                     for ($i = 1; $i <= 31; $i++) {
-                        echo " <option value='$i'>$i</option>";
+                        echo "<option value='$i'>$i</option>";
                     }
                     ?>
-
                 </select>
                 <button class="btn btn-primary btn-sm dropdown-toggle" type="submit" style="padding:6px 10px;">Xem</button>
             </form>
@@ -72,7 +74,6 @@ $hdn = new HoaDonNhapController();
             </a>
             <a class="btn btn-primary btn-sm dropdown-toggle" href="">
                 Xuất Exel
-
             </a>
         </div>
     </section>
@@ -103,32 +104,28 @@ $hdn = new HoaDonNhapController();
                                         </thead>
                                         <tbody>
                                             <?php
-                                             if(count($list)==0){
-                                                echo "<tr>
-                                                    <td>Không có hóa đơn nào</td>
-                                                </tr>";
-                                             }        
-                                            /*Hiển thị danh sách hóa đơn nhập*/
+                                            if (count($list) == 0) {
+                                                echo "<tr><td colspan='9' class='text-center'>Không có hóa đơn nào</td></tr>";
+                                            }
+                                            /* Hiển thị danh sách hóa đơn nhập */
                                             foreach ($list as $i) {
                                                 $str = '<tr>'
                                                     . '<td class="text-center">' . $i->getMaHDN() . '</td>'
                                                     . '<td class="text-center">' . $i->getNgayTao() . '</td>'
-                                                    . '<td class="text-center">' . $i->getTongTienHD() . '</td>'
+                                                    . '<td class="text-center">' . formatCurrency($i->getTongTienHD()) . '</td>'
                                                     . '<td class="text-center">' . $i->getMaSoThue() . '</td>'
                                                     . '<td class="text-center">' . $i->getGhiChu() . '</td>'
                                                     . '<td class="text-center">' . $i->getPTThanhToan() . '</td>'
                                                     . '<td class="text-center">' . $i->getGiamGiaHD() . '</td>'
                                                     . '<td class="text-center">' . $i->getTrangThai() . '</td>'
-
-                                                    . "<td><a class='btn btn-success btn-xs' href='?admin=xemHDN&MaHDN=" . $i->getMaHDN() . "'>Xem</a></td>
-                                                <td>
-                                                <a class='btn btn-danger btn-xs' href='?admin=suaHDN&MaHDN=" . $i->getMaHDN() . "'>Sửa</a>
-                                                </td>
+                                                    . "<td>
+                                                        <a class='btn btn-success btn-xs' href='?admin=xemHDN&MaHDN=" . $i->getMaHDN() . "'>Xem</a>
+                                                        <a class='btn btn-danger btn-xs' href='?admin=suaHDN&MaHDN=" . $i->getMaHDN() . "'>Sửa</a>
+                                                    </td>
                                                 </tr>";
                                                 echo $str;
                                             }
                                             ?>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -139,9 +136,9 @@ $hdn = new HoaDonNhapController();
                                             <?php
                                             $n = round($hdn->sumPage() / 10);
                                             echo '<li><a href="?admin=hienThiHoaDonNhap&page=' . ($currentPage >= 2 ? $currentPage - 1 : $currentPage) . '"> <</a></li>';
-                                            for ($i = 1; $i <= ($n ); $i++) {
+                                            for ($i = 1; $i <= $n; $i++) {
                                                 $str = '<li><a href="?admin=hienThiHoaDonNhap&page=' . $i . '">' . $i . '</a></li>';
-                                                if ($i > 5 && $i < round($sp->sumPage('nhanvien') / 10)) {
+                                                if ($i > 5 && $i < $n) {
                                                     $str = '<li>...</li>';
                                                     $str = '<li><a href="?admin=hienThiHoaDonNhap&page=' . $n . '">' . $n . '</a></li>';
                                                     echo $str;

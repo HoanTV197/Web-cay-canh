@@ -4,6 +4,7 @@ $sanpham = new SanPhamController();
 $loai = $sanpham->getLoaiSP();
 $maSP = $_GET['MaSP'];
 $sp = $sanpham->getProduct($maSP);
+
 if(isset($_POST['tenSP'])){
     $TenSP = $_POST['tenSP'];
     $MaLoai = $_POST['loai'];
@@ -13,18 +14,26 @@ if(isset($_POST['tenSP'])){
     $DonGiaBan = $_POST['giaBan'];
     $GhiChu = $_POST['ghiChu'];
     $ThoiGianBH = $_POST['tg'];
-    $AnhDaiDien = $_FILES['img']['name'];
     
-    $kq = $sanpham->editProduct($maSP, $MaLoai, $TenSP, $DonGiaBan, $DonGiaNhap, $NgayNhap, $ThoiGianBH, $MoTaSP, 'cây', $AnhDaiDien, $GhiChu);
-    if ($kq) {
-        echo "<script>alert('Sửa thành công');window.location='?admin=hienThiSanPham&page=1';</script>";
-
+    // Xử lý việc tải lên ảnh
+    $AnhDaiDien = $_FILES['img']['name'];
+    $target_dir = "../../assets/public/images/products/";
+    $target_file = $target_dir . basename($AnhDaiDien);
+    
+    // Kiểm tra nếu ảnh được tải lên thành công
+    if (move_uploaded_file($_FILES['img']['tmp_name'], $target_file)) {
+        $kq = $sanpham->editProduct($maSP, $MaLoai, $TenSP, $DonGiaBan, $DonGiaNhap, $NgayNhap, $ThoiGianBH, $MoTaSP, 'cây', $AnhDaiDien, $GhiChu);
+        if ($kq) {
+            echo "<script>alert('Sửa thành công');window.location='?admin=hienThiSanPham&page=1';</script>";
+        } else {
+            echo "<script>alert('Sửa không thành công');window.location='?admin=hienThiSanPham&page=1';</script>";
+        }
     } else {
-        echo "<script>alert('Sửa không thành công');window.location='?admin=hienThiSanPham&page=1';</script>";
-
+        echo "<script>alert('Tải lên ảnh thất bại.');</script>";
     }
 }
 ?>
+
 <div class="content-wrapper">
     <form action="<?php echo '?admin=suaSanPham&MaSP=' . $maSP;?>" enctype="multipart/form-data" method="POST" accept-charset="utf-8">
         <section class="content-header">
@@ -71,12 +80,11 @@ if(isset($_POST['tenSP'])){
                                 </div>
                                 <div class="form-group">
                                     <label>Mô tả ngắn</label>
-                                    <textarea name="moTa" class="form-control" row="10" value="<?php echo $sp->getMoTaSP()?>"></textarea>
+                                    <textarea name="moTa" class="form-control" rows="10"><?php echo $sp->getMoTaSP()?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Ngày nhập</label>
                                     <input name="ngayNhap" class="form-control" type="date" value="<?php echo $sp->getNgayNhap()?>">
-                    
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -97,14 +105,17 @@ if(isset($_POST['tenSP'])){
                                 </div>
                                 <div class="form-group">
                                     <label>Ghi chú </label>
-                                    <input name="ghiChu" class="form-control" type="tex" value="<?php echo $sp->getGhiChu()?>">
+                                    <input name="ghiChu" class="form-control" type="text" value="<?php echo $sp->getGhiChu()?>">
                                     <div class="error" id="password_error"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Hình ảnh sản phẩm</label>
-                                    <input type="file" id="image_list" name="img" multiple required>
+                                    <label>Hình ảnh sản phẩm hiện tại</label>
+                                    <img src="../../assets/public/images/products/<?php echo $sp->getAnhDaiDien(); ?>" alt="Current Image" style="width:100px; height:100px;">
                                 </div>
-                               
+                                <div class="form-group">
+                                    <label>Thay đổi hình ảnh sản phẩm</label>
+                                    <input type="file" id="image_list" name="img" multiple>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -116,5 +127,4 @@ if(isset($_POST['tenSP'])){
         </section>
     </form>
     <!-- /.content -->
-    </form>
 </div>

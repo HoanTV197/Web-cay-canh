@@ -52,7 +52,7 @@ class SanPhamController
     public function getAllProduct($page, $sort)
     {
         $db = new DB();
-        $record_page = 8;
+        $record_page = 10;
         $numberPage = ($page - 1) * $record_page;
     
         // Define sorting options
@@ -129,87 +129,52 @@ class SanPhamController
         return $this->listProduct;
     }
     /*----------------Sửa sản phẩm--------------*/
-    function editProduct($MaSP,$MaLoai,$TenSP,$DonGiaBan,$DonGiaNhap,$NgayNhap,$ThoiGianBH,$MoTaSP,$donViTinh,$AnhDaiDien,$GhiChu)
-    {
-        $sql = "UPDATE `sanpham` 
-        SET 
-        `MaLoai`='$MaLoai',
-        `TenSP`='$TenSP',
-        `DonGiaBan`='$DonGiaBan',
-        `DonGiaNhap`='$DonGiaNhap',
-        `NgayNhap`='$NgayNhap',
-        `ThoiGianBH`='$ThoiGianBH',
-        `MoTaSP`='$MoTaSP',
-        `donViTinh`='$donViTinh',
-        `AnhDaiDien`='$AnhDaiDien',
-        `GhiChu`='$GhiChu' WHERE `MaSP`='$MaSP';";
-        echo $sql;
-        $db = new DB();
-       
-       $kq= $db->executeSQL($sql);
-        if($kq){
-            return true;
-        }
-        else{
-            return false;
-        }
+    function editProduct($MaSP, $MaLoai, $TenSP, $DonGiaBan, $DonGiaNhap, $NgayNhap, $ThoiGianBH, $MoTaSP, $donViTinh, $AnhDaiDien, $GhiChu)
+{
+    $sql = "UPDATE sanpham 
+            SET MaLoai='$MaLoai', TenSP='$TenSP', DonGiaBan='$DonGiaBan', DonGiaNhap='$DonGiaNhap', NgayNhap='$NgayNhap', ThoiGianBH='$ThoiGianBH', MoTaSP='$MoTaSP', donViTinh='$donViTinh', AnhDaiDien='$AnhDaiDien', GhiChu='$GhiChu' 
+            WHERE MaSP='$MaSP';";
+    $db = new DB();
+    $kq = $db->executeSQL($sql);
 
-    }
-    /*----------------Thêm sản phẩm--------------*/
-    function insertProduct($MaSP, $MaLoai, $TenSP, $DonGiaBan, $DonGiaNhap, $NgayNhap, $ThoiGianBH, $MoTaSP, $donViTinh, $AnhDaiDien, $GhiChu)
-    {
-        $sql = "INSERT INTO `sanpham`(`MaSP`, `MaLoai`, `TenSP`, `DonGiaBan`, `DonGiaNhap`, `NgayNhap`, `ThoiGianBH`, `MoTaSP`, `donViTinh`, `AnhDaiDien`, `GhiChu`) VALUES 
-        ('$MaSP','$MaLoai','$TenSP','$DonGiaBan','$DonGiaNhap','$NgayNhap','$ThoiGianBH','$MoTaSP','$donViTinh','$AnhDaiDien','$GhiChu');" ;
-        $db = new DB();
-        echo $sql;
-        $kq=$db->executeSQL($sql);
+    return $kq ? true : false;
+}
+/*----------------Thêm sản phẩm--------------*/
+public function insertProduct($MaLoai, $TenSP, $DonGiaBan, $DonGiaNhap, $NgayNhap, $ThoiGianBH, $MoTaSP, $donViTinh, $AnhDaiDien, $GhiChu) {
+    $MaSP = $this->autoMaSP(); // Sử dụng phương thức để tạo mã sản phẩm tự động
+    $sql = "INSERT INTO sanpham (MaSP, MaLoai, TenSP, DonGiaBan, DonGiaNhap, NgayNhap, ThoiGianBH, MoTaSP, donViTinh, AnhDaiDien, GhiChu) 
+            VALUES ('$MaSP', '$MaLoai', '$TenSP', '$DonGiaBan', '$DonGiaNhap', '$NgayNhap', '$ThoiGianBH', '$MoTaSP', '$donViTinh', '$AnhDaiDien', '$GhiChu')";
+    
+    $db = new DB();
+    $kq = $db->executeSQL($sql);
 
-        if($kq){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+    return $kq ? true : false;
+}
+
     /*----------------Xóa sản phẩm--------------*/
-       function deleteProduct($id)
-       {
+    function deleteProduct($id)
+    {
         $db = new DB();
-        $sql = "SELECT MaSP FROM chitiethdb;";
+        $sql = "SELECT MaSP FROM chitiethdb WHERE MaSP='$id';";
         $ctb = $db->executeSQL($sql);  
-        //check sp tồn tại trong ctb  
-        $check = true;
-        if($ctb->num_rows>0){
-            while($row=$ctb->fetch_assoc()){
-                if($id==$row["MaSP"]){
-                    $check = false;
-                }
-            }
+    
+        $check = $ctb->num_rows === 0;
+    
+        if ($check) {
+            $sql1 = "SELECT MaSP FROM chitiethdn WHERE MaSP='$id';";
+            $ctn = $db->executeSQL($sql1);    
+            $check = $ctn->num_rows === 0;
         }
-        //check sp tồn tại trong ctn
-        $sql1 = "SELECT MaSP FROM chitiethdn;";
-        $ctn = $db->executeSQL($sql1);    
-        if($ctn->num_rows>0){
-            while($row=$ctn->fetch_assoc()){
-                if($id==$row["MaSP"]){
-                    $check = false;
-                }
-            }
+    
+        if ($check) {
+            $sql2 = "DELETE FROM sanpham WHERE MaSP='$id';";
+            $kq = $db->executeSQL($sql2);
+            return $kq ? true : false;
+        } else {
+            return false;
         }
-         if($check){
-            $sql2= "DELETE FROM `sanpham` WHERE MaSP='".$id."' ;";
-            echo $sql2;
-            $kq=$db->executeSQL($sql2);
-            if ($kq) {
-                return true;
-            } else {
-                return false;
-            }
-       }
-       else{
-        return false;
-       }   
-      }
+    }
+    
     /*----------------loại sản phẩm--------------*/
     public function getLoaiSP()
     {
