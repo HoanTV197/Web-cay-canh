@@ -30,10 +30,145 @@ session_start();
     <script src="../../assets/public/js/jquery-2.2.3.min.js"></script>
     <script src="../../assets/public/js/cart.js"></script>
     <style>
+        .cart_item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        .cart_item_image img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .cart_item_info {
+            flex-grow: 1;
+        }
+
+        .remove {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .logo-search {
+            height: 124px;
+        }
+
+        .cart_count_updated {
+            animation: bounce 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-15px);
+            }
+
+            60% {
+                transform: translateY(-7px);
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cartCountElement = document.getElementById('cart-count');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+
+            function updateCartCount() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const totalCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+                cartCountElement.textContent = `(${totalCount})`;
+                
+                // Thêm lớp để kích hoạt hiệu ứng
+                cartCountElement.classList.add('cart_count_updated');
+                
+                // Loại bỏ lớp sau khi hiệu ứng kết thúc
+                setTimeout(() => {
+                    cartCountElement.classList.remove('cart_count_updated');
+                }, 500); // Thời gian phù hợp với thời gian của animation
+            }
+
+            function displayCartItems() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cartItemsContainer.innerHTML = '';
+
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart_item');
+
+                    cartItem.innerHTML = `
+                        <div class="cart_item_image"><img src="../../assets/public/images/${item.image}" alt="${item.name}"></div>
+                        <div class="cart_item_info">
+                            <p class="cart_item_title">${item.name}</p>
+                            <span class="cart_item_quantity">Số lượng: ${item.quantity}</span>
+                            <span class="cart_item_price">Giá: ${item.price}</span>
+                            <button class="remove" data-code="${item.code}">Xóa</button>
+                        </div>
+                    `;
+
+                    cartItemsContainer.appendChild(cartItem);
+                });
+
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.remove').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const code = this.getAttribute('data-code');
+                        removeFromCart(code);
+                    });
+                });
+            }
+
+            function removeFromCart(code) {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart = cart.filter(item => item.code !== code);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                displayCartItems();
+            }
+
+            document.querySelectorAll('.add-to-cart-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const code = this.getAttribute('data-code');
+                    const name = this.getAttribute('data-name');
+                    const image = this.getAttribute('data-image');
+                    const price = this.getAttribute('data-price');
+                    const max = this.getAttribute('data-max');
+                    const quantity = 1; // Assuming you add one item at a time, adjust if needed
+
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const existingItem = cart.find(item => item.code === code);
+
+                    if (existingItem) {
+                        existingItem.quantity += quantity;
+                    } else {
+                        cart.push({ code, name, image, price, max, quantity });
+                    }
+
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
+                    displayCartItems();
+                });
+            });
+
+            updateCartCount(); // Cập nhật số lượng giỏ hàng khi trang được tải
+            displayCartItems(); // Hiển thị các sản phẩm trong giỏ hàng
+        });
+    </script>
+    <style>
         .logo-search {
             height: 124px;
         }
     </style>
+
+
     </head>
 
     <body>
@@ -81,35 +216,27 @@ session_start();
                 </form>
             </div>
             <div class=" col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs " style=" padding: 24px; ">
-                <!-- Cart -->
-                <div class=" cart_header ">
-                    <a href=" ?pages=giohang" title=" Giỏ hàng ">
-                        <span class=" cart_header_icon ">
-                            <img src=" ../../assets/public/images/cart2.png " alt=" Cart ">
+                 <!-- Cart -->
+                 <div class="cart_header">
+                    <a href="?pages=giohang" title="Giỏ hàng">
+                        <span class="cart_header_icon">
+                            <img src="../../assets/public/images/cart2.png" alt="Cart">
                         </span>
-                        <span class=" box_text ">
-                            <strong class=" cart_header_count ">Giỏ hàng </strong>
-                            <span class=" cart_price ">
+                        <span class="box_text">
+                            <strong class="cart_header_count">Giỏ hàng 
+                                <span id="cart-count" style="color:#ff0000">(0)</span>
+                            </strong>
+                            <span class="cart_price">
                                 <p></p>
                             </span>
                         </span>
                     </a>
-                    <div class=" cart_clone_box ">
-                        <div class=" cart_box_wrap hidden ">
-                            <div class=" cart_item original clearfix ">
-                                <div class=" cart_item_image ">
-                                </div>
-                                <div class=" cart_item_info ">
-                                    <p class=" cart_item_title "><a href=" " title=" "></a></p>
-                                    <span class=" cart_item_quantity "></span>
-                                    <span class=" cart_item_price "></span>
-                                    <span class=" remove "></span>
-                                </div>
-                            </div>
+                    <div class="cart_clone_box">
+                        <div class="cart_box_wrap hidden">
+                            <div id="cart-items-container"></div>
                         </div>
                     </div>
                 </div>
-                <!-- End Cart -->
                 <!-- Account -->
                 <div class=" user_login ">
                     <a href="?pages=login " title=" Tài khoản ">

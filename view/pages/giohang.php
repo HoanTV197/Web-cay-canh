@@ -4,66 +4,62 @@
     this.genderHTMLCart()
 </script>
 
-<?php 
+<?php
 include_once '../../database/DB.php';
 include_once '../../model/SanPham.php';
-echo $_SESSION['username'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $db = new DB();
     $dataProduct = $_POST['cart'] ?? [];
     $totalCart = $_POST['total-cart'] ?? 0;
     $total = 0;
-   
-    foreach($_REQUEST['cart'] as $key => $value) {
-        $sql = "SELECT * FROM sanpham WHERE MaSP = '".$value['code']."'";
-       
+    $productCount = 0; // Initialize product count
+
+    foreach ($dataProduct as $key => $value) {
+        $sql = "SELECT * FROM sanpham WHERE MaSP = '" . $value['code'] . "'";
         $result = $db->executeSQL($sql);
+
         if (!($result->num_rows > 0)) {
-            $mess = "Không tìm thấy sản phẩm mã ".$value['code'];
+            $mess = "Không tìm thấy sản phẩm mã " . $value['code'];
             echo "<script type='text/javascript'>alert('$mess')</script>";
             return;
         }
+
         if ($result->num_rows > 0) {
             $product = $result->fetch_assoc();
             $total += $value['quantity'] * $product['DonGiaBan'];
+            $productCount += $value['quantity']; // Add the quantity of the current product to the count
             $_SESSION['tongtien'] = $total;
         }
-        
     }
+
+    // Save product count to session
+    $_SESSION['cart_count'] = $productCount;
+
     if ($total != $totalCart) {
         $messError = "Giá sản phẩm không đúng";
         echo "<script type='text/javascript'>alert('$messError')</script>";
         return;
     }
-   // echo $dataProduct[0];
     $order_products = json_encode($dataProduct);
     $maSP = json_decode($order_products);
-    
-    //câu lện sql cần thực thi
+
     include_once '../../controller/HoaDonBanController.php';
     $hd = new HoaDonBanController();
-    //Lấy ra thời gian hiện tại
     date_default_timezone_set('Asia/Ho_Chi_Minh');
     $NgayTao = date('Y-m-d H:i:s');
-    //Lấy ra mã khách hàng
     $username = $_SESSION['username'];
-    $MaKH=$hd->getKhachHang($username);
-    //Tạo mã chi tiết HD
-    $MaCTHDB=$hd->autoMaCTHDB();
-    //Tạo mã hóa đơn
+    $MaKH = $hd->getKhachHang($username);
+    $MaCTHDB = $hd->autoMaCTHDB();
     $MaHDB = $hd->autoMaHDB();
-    //insert hóa đơn
     $hd->insertHDB($hd->autoMaHDB(), $NgayTao, $total, 'MS10', 'Tiền mặt', '0', '0', '', $MaKH, 'NV001');
-    var_dump($MaHDB);
-   //insert chi tiết hóa đơn
-    foreach($maSP as $i){
+   
+    foreach ($maSP as $i) {
         $MaSP = $i->code;
-        $SoLuong=$i->quantity;
-        $hd->insertCTHDB($MaHDB,$MaCTHDB,$MaSP,$SoLuong);
+        $SoLuong = $i->quantity;
+        $hd->insertCTHDB($MaHDB, $MaCTHDB, $MaSP, $SoLuong);
     }
     echo "<script type='text/javascript'>this.handleOrderSuccess()</script>";
-    
 }
 ?>
  
