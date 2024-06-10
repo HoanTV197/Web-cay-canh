@@ -2,26 +2,21 @@
     <section class="content-header">
         <h1>Danh sách tin tức</h1>
         <div class="breadcrumb">
-
             <a class="btn btn-primary btn-sm" href="?admin=themTinTuc" role="button">
                 <span class="glyphicon glyphicon-plus"></span> Thêm mới
             </a>
-          
             <a class="btn btn-primary btn-sm dropdown-toggle" href="?admin=hienThiTinTuc&page=1&excel=tintuc">
                 Xuất Exel
             </a>
         </div>
     </section>
-    <!-- Main coupon -->
     <section class="content">
         <div class="row">
             <div class="col-md-12">
                 <div class="box" id="view">
                     <div class="box-header with-border">
-                        <!-- /.box-header -->
                         <div class="box-body">
                             <div class="row" style='padding:0px; margin:0px;'>
-                                <!--ND-->
                                 <div class="table-responsive">
                                     <table class="table table-hover table-bordered">
                                         <thead>
@@ -37,14 +32,10 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                         include_once '../../controller/TinTucController.php';
-                                         
-                                         // lấy số trang hiện tại
-                                          $currentPage=$_GET['page'];
-                                          //gọi đến controller
-                                           $tt = new TinTucController();
-                                          $listNews = $tt->getAllNews($currentPage);
-                                             /*---Hiển thị danh sách tin tức ------*/
+                                             include_once '../../controller/TinTucController.php';
+                                             $currentPage = $_GET['page'];
+                                             $tt = new TinTucController();
+                                             $listNews = $tt->getAllNews($currentPage);
                                              foreach ($listNews as $i) {
                                                 $str = '<tr>'
                                                     . '<td class="text-center">' . $i->getMaTinTuc() . '</td>'
@@ -55,26 +46,24 @@
                                                     . '<td class="text-center">' . $i->getNgayTao() . '</td>'         
                                                     . "<td><a class='btn btn-success btn-xs' href='?admin=suaTinTuc&MaTinTuc=" . $i->getMaTinTuc() . "'>Sửa</a></td>
                                                 <td>
-                                                <a class='btn btn-danger btn-xs' href='?admin=xoaTinTuc&MaTinTuc=" . $i->getMaTinTuc() . "'>Xóa</a>
+                                                <a class='btn btn-danger btn-xs' href='?admin=xoaTinTuc&MaTinTuc=" . $i->getMaTinTuc() . "' onclick='return confirm(\"Bạn có chắc chắn muốn xóa?\")'>Xóa</a>
                                                 </td>
                                                 </tr>";
                                                 echo $str;
                                             }  
                                             ?>
-                                           
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 text-center">
                                         <ul class="pagination">
-                                            <!-- --------------------------------Phân trang----------------------------------- -->
-                                              <?php
-                                             $n=round($tt->sumPage() / 4);
-                                            echo '<li><a href="?admin=hienThiTinTuc&page=' .( $currentPage>=2?$currentPage-1:$currentPage) . '"> <</a></li>';
-                                            for ($i = 1; $i <=$n;$i++){
+                                            <?php
+                                             $n = round($tt->sumPage() / 4);
+                                            echo '<li><a href="?admin=hienThiTinTuc&page=' .( $currentPage >= 2 ? $currentPage - 1 : $currentPage) . '"> <</a></li>';
+                                            for ($i = 1; $i <= $n; $i++) {
                                                 $str = '<li><a href="?admin=hienThiTinTuc&page=' . $i . '">' . $i . '</a></li>';
-                                                if($i>5&& $i<$n){
+                                                if ($i > 5 && $i < $n) {
                                                     $str = '<li>...</li>';
                                                     $str = '<li><a href="?admin=hienThiTinTuc&page=' . $n . '">' . $n . '</a></li>';
                                                     echo $str;
@@ -82,27 +71,21 @@
                                                 }
                                                 echo $str;
                                             }
-                                            echo '<li><a href="?admin=hienThiTinTuc&page=' . ($currentPage>= $n?$currentPage:$currentPage+1). '">></a></li>'; 
+                                            echo '<li><a href="?admin=hienThiTinTuc&page=' . ($currentPage >= $n ? $currentPage : $currentPage + 1). '">></a></li>'; 
                                             ?>
                                         </ul>
                                     </div>
                                 </div>
-                                <!-- /.ND -->
                             </div>
                         </div>
-                        <!-- ./box-body -->
                     </div>
-                    <!-- /.box -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
     </section>
-    <!-- /.coupon -->
 </div>               
 <style>
-    .text-center img{
-        width:50px;
-        height:50px;
+    .text-center img {
+        width: 50px;
+        height: 50px;
     }
 </style>
