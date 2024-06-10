@@ -245,39 +245,42 @@
 
 <div class=" home-blog ">
     <div class=" container ">
-        <div class=" row-p ">
-            <div class=" text-center ">
-                <h2 class=" sectin-title title title-blue ">Tin tức mới nhất</h2>
-            </div>
-        </div>
-        <div class=" blog-content ">
-            <?php
-            /*--------- ---------------- Danh sách TIn tức-------------------------  */
-            $tintuc = $sanpham->layTinTuc();
-            for ($i = count($tintuc) - 1; $i > count($tintuc) - 5; $i--) {
-                echo $str = " <div class=' col-xs-12 col-12 col-sm-6 col-md-2 col-lg-2' style=' margin: 5px;'>
-                <div class='latest'>
-                    <a href='?pages=chiTietTinTuc&MaTinTuc=". $tintuc[$i]->getMaTinTuc()."'>
-                        <div class='tempvideo'>
-                            <img width='98%' src='../../assets/public/images/products/" . $tintuc[$i]->getAnh() . "'>
-                        </div>
-                        <h3 style=' color: #999;'>" . $tintuc[$i]->getTieuDe() . "</h3>
-                    </a>
+            <div class=" row-p ">
+                <div class=" text-center ">
+                    <h2 class=" sectin-title title title-blue ">Tin tức mới nhất</h2>
                 </div>
-            </div>";
-            }
-            ?>
-                       
-             </div>
+            </div>
+            <div class=" blog-content ">
+                <?php
+                /*--------- ---------------- Danh sách TIn tức-------------------------  */
+                $tintuc = $sanpham->layTinTuc();
+                $start = max(count($tintuc) - 4, 0); // Ensure we start at a valid index and avoid negative
+                for ($i = count($tintuc) - 1; $i >= $start; $i--) {
+                    if (isset($tintuc[$i])) { // Check if the index exists and is not null
+                        echo $str = " <div class=' col-xs-12 col-12 col-sm-6 col-md-2 col-lg-2' style=' margin: 5px;'>
+                        <div class='latest'>
+                            <a href='?pages=chiTietTinTuc&MaTinTuc=". $tintuc[$i]->getMaTinTuc()."'>
+                                <div class='tempvideo'>
+                                    <img width='98%' src='../../assets/public/images/products/" . $tintuc[$i]->getAnh() . "'>
+                                </div>
+                                <h3 style=' color: #999;'>" . $tintuc[$i]->getTieuDe() . "</h3>
+                            </a>
+                        </div>
+                    </div>";
+                    }
+                }
+                ?>
+                           
+                 </div>
+        </div>
     </div>
-</div>
-<div class=" adv ">
-    <section id=" service " style=" margin: 20px; ">
-        <div class=" container ">
-            <div class=" row ">
-                <div id=" service_home " class=" clearfix ">
-                    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center m-b-xs-10 ">
-                        <div class=" service_item ">
+    <div class=" adv ">
+        <section id=" service " style=" margin: 20px; ">
+            <div class=" container ">
+                <div class=" row ">
+                    <div id=" service_home " class=" clearfix ">
+                        <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center m-b-xs-10 ">
+                            <div class=" service_item ">
                             <div class=" icon icon_product ">
                                 <img src=" ../../assets/public/images/icon_142e7.png " alt=" ">
                             </div>

@@ -37,21 +37,19 @@ $listTT = $tt->getAllNews1();
                     <p>Bài viết mới nhất</p>
                     <div class="tab-container ">
                         <?php
-                        for ($i = count($listTT)-1; $i > count($listTT)-4;$i--){
-                            echo "<div class='spost clearfix '>
-                            <div class='entry-image e-img'>
-                                <a href='tin-tuc/chon-cay-de-canh-ong-than-tai' class='nobg a-circle '>
-                                    <img class='img-circle-custom' src='../../assets/public/images/products/".$listTT[$i]->getAnh()."' alt='Mua phụ kiện theo Combo giảm đến 30% '>
-                                </a>
-                            </div>
-                            <div class='entry-c'>
-                                <div class='entry-title e-title '>
-                                    <h4>
-                                        <a href='tin-tuc/chon-cay-de-canh-ong-than-tai '>".$listTT[$i]->getTieuDe()."</a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>";
+                        if (count($listTT) > 0) {
+                            $start = max(count($listTT) - 3, 0); // Ensure we don't start with a negative index
+                            for ($i = count($listTT) - 1; $i >= $start; $i--) {
+                                if ($listTT[$i] !== null) { // Check if the element is not null
+                                    echo "<div class='spost clearfix'>
+                                        <div class='entry-image e-img'>
+                                            <a href='tin-tuc/chon-cay-de-canh-ong-than-tai' class='nobg a-circle'>
+                                                <img class='img-circle-custom' src='../../assets/public/images/products/" . $listTT[$i]->getAnh() . "' alt='Mua phụ kiện theo Combo giảm đến 30%'>
+                                            </a>
+                                        </div>
+                                    </div>";
+                                }
+                            }
                         }
                         ?>
                        
