@@ -11,12 +11,19 @@ include_once '../../model/SanPham.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($_SESSION['username'])) {
         echo "<script type='text/javascript'>alert('Vui lòng đăng nhập. Chúng tôi sẽ chuyển hướng về trang đăng nhập trong giây lát ...!');</script>";
-        echo "<script type='text/javascript'>window.location.href='../../index.php';</script>";
+        echo "<sc type='text/javascript'>window.location.href='../../index.php';</script>";
         return;
     }
 
     $db = new DB();
     $dataProduct = $_POST['cart'] ?? [];
+    if (empty($dataProduct)) {
+        //chuyển về trang chủ nếu không có sản phẩm trong giỏ hàng
+        echo "<script>setTimeout(function(){window.location.href = '?pages=trangchu';}, 1000);</script>";
+        echo "<script> alert('Giỏ hàng trống. Chúng tôi sẽ chuyển hướng về trang chủ trong giây lát ...!');</script>";
+        return;
+    }
+
     $totalCart = $_POST['total-cart'] ?? 0;
     $total = 0;
     $productCount = 0; // Initialize product count
