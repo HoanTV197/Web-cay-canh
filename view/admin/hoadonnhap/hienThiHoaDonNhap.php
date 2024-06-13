@@ -120,7 +120,7 @@ $hdn = new HoaDonNhapController();
                                                     . '<td class="text-center">' . $i->getTrangThai() . '</td>'
                                                     . "<td>
                                                         <a class='btn btn-success btn-xs' href='?admin=xemHDN&MaHDN=" . $i->getMaHDN() . "'>Xem</a>
-                                                        <a class='btn btn-danger btn-xs' href='?admin=suaHDN&MaHDN=" . $i->getMaHDN() . "'>Sửa</a>
+                                             
                                                     </td>
                                                 </tr>";
                                                 echo $str;
