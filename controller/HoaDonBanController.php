@@ -441,6 +441,7 @@ public function totalPage($trangThai = null) // Sửa đổi tham số $trangTha
         }
     }
 
+        // Hàm lấy danh sách hóa đơn bán theo trạng thái
     public function doanhThuHoanTat($year) {
         $db = new DB();
         $sql = "SELECT MONTH(NgayTao) as thang, SUM(TongTienHD) as doanhthu, COUNT(MaHDB) as sl 
@@ -449,8 +450,4 @@ public function totalPage($trangThai = null) // Sửa đổi tham số $trangTha
                 GROUP BY MONTH(NgayTao)";
         return $db->executeSQL($sql);
     }
-
-
-    
-    
 }
