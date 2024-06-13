@@ -11,7 +11,7 @@ include_once '../../model/SanPham.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($_SESSION['username'])) {
         echo "<script type='text/javascript'>alert('Vui lòng đăng nhập. Chúng tôi sẽ chuyển hướng về trang đăng nhập trong giây lát ...!');</script>";
-        echo "<sc type='text/javascript'>window.location.href='../../index.php';</script>";
+        echo "<script>setTimeout(function(){window.location.href = '../../index.php';}, 100);</script>";
         return;
     }
 
