@@ -14,40 +14,35 @@ class HoaDonBanController
 
     /*----------------Tạo mã hóa đơn bán tự động--------------*/
 
-    public function autoMaHDB()
-    {
-        //khởi tạo database và kết nối
+    public function autoMaHDB() {
         $db = new DB();
-        //câu lện sql cần thực thi
-        $sql = "SELECT * FROM HoaDonBan;";
+        $sql = "SELECT MaHDB FROM hoadonban ORDER BY MaHDB DESC LIMIT 1";
         $result = $db->executeSQL($sql);
-
-        if ($result->num_rows >= 10) {
-            $maHDB = "HDB" . ($result->num_rows + 1);
-            return $maHDB;
+        $lastMaHDB = $result->fetch_assoc()['MaHDB'];
+    
+        if ($lastMaHDB) {
+            $lastNumber = (int)substr($lastMaHDB, 3); // Lấy phần số từ mã cuối cùng
+            $newNumber = $lastNumber + 1;
+            return 'HDB' . str_pad($newNumber, 3, '0', STR_PAD_LEFT); // Tạo mã mới với định dạng HDBxxx
         } else {
-            $maHDB = "HDB0" . ($result->num_rows + 1);
-            return $maHDB;
+            return 'HDB001'; // Trường hợp không có mã nào trong cơ sở dữ liệu
         }
     }
     /*----------------Tạo mã chi tiết hóa đơn bán tự động--------------*/
+    public function autoMaCTHDB() {
+    $db = new DB();
+    $sql = "SELECT MaCTHDB FROM chitiethdb ORDER BY MaCTHDB DESC LIMIT 1";
+    $result = $db->executeSQL($sql);
+    $lastMaCTHDB = $result->fetch_assoc()['MaCTHDB'];
 
-    public function autoMaCTHDB()
-    {
-        //khởi tạo database và kết nối
-        $db = new DB();
-        //câu lện sql cần thực thi
-        $sql = "SELECT * FROM chitietHDB;";
-        $result = $db->executeSQL($sql);
-
-        if ($result->num_rows >= 10) {
-            $maCTHDB = "CTHDB" . ($result->num_rows + 1);
-            return $maCTHDB;
-        } else {
-            $maCTHDB = "CTHDB0" . ($result->num_rows + 1);
-            return $maCTHDB;
-        }
+    if ($lastMaCTHDB) {
+        $lastNumber = (int)substr($lastMaCTHDB, 6); // Lấy phần số từ mã cuối cùng
+        $newNumber = $lastNumber + 1;
+        return 'CTHDB' . str_pad($newNumber, 3, '0', STR_PAD_LEFT); // Tạo mã mới với định dạng CTHDBxxx
+    } else {
+        return 'CTHDB001'; // Trường hợp không có mã nào trong cơ sở dữ liệu
     }
+}
     /*----------------Tính tổng hóa đơn bán --------------*/
 
     public function sumPage()
@@ -444,6 +439,15 @@ public function totalPage($trangThai = null) // Sửa đổi tham số $trangTha
         } else {
             return null;
         }
+    }
+
+    public function doanhThuHoanTat($year) {
+        $db = new DB();
+        $sql = "SELECT MONTH(NgayTao) as thang, SUM(TongTienHD) as doanhthu, COUNT(MaHDB) as sl 
+                FROM hoadonban 
+                WHERE YEAR(NgayTao) = '$year' AND TrangThai IN (2, 5)
+                GROUP BY MONTH(NgayTao)";
+        return $db->executeSQL($sql);
     }
 
 

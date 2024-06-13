@@ -45,7 +45,7 @@
                                         $currentPage = 1;
                                     }
 
-                                    // Lấy danh sách hóa đơn hoàn tất (trạng thái 2) cho trang hiện tại
+                                    // Lấy danh sách hóa đơn hoàn tất (trạng thái 2 và 5) cho trang hiện tại
                                     $listHDB = $hdbController->listHDB($currentPage, [2,5]); 
 
 

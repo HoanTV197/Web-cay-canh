@@ -56,13 +56,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $NgayTao = date('Y-m-d H:i:s');
     $username = $_SESSION['username'];
     $MaKH = $hd->getKhachHang($username);
-    $MaCTHDB = $hd->autoMaCTHDB();
-    $MaHDB = $hd->autoMaHDB();
-    $hd->insertHDB($hd->autoMaHDB(), $NgayTao, $total, 'MS10', 'Tiền mặt', '0', '0', '', $MaKH, 'NV001');
+    $MaHDB = $hd->autoMaHDB(); // Gọi phương thức tạo mã hóa đơn bán tự động
+    $hd->insertHDB($MaHDB, $NgayTao, $total, 'MS10', 'Tiền mặt', '0', '0', '', $MaKH, 'NV001');
    
     foreach ($maSP as $i) {
         $MaSP = $i->code;
         $SoLuong = $i->quantity;
+        $MaCTHDB = $hd->autoMaCTHDB(); // Gọi phương thức tạo mã chi tiết hóa đơn bán tự động
         $hd->insertCTHDB($MaHDB, $MaCTHDB, $MaSP, $SoLuong);
     }
     echo "<script type='text/javascript'>this.handleOrderSuccess()</script>";
