@@ -1,19 +1,19 @@
 function addCart(itemProduct) {
     const dataCart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
-    const check = dataCart.find((item) => item.code === itemProduct.code)
+    const check = dataCart.find((item) => item.code === itemProduct.code);
     if (check) {
-        dataCart.map((item) => {
-            if ((item) => item.code === itemProduct.code) {
+        dataCart.forEach((item) => {
+            if (item.code === itemProduct.code) {
                 item.quantity += 1;
             }
-            return item;
-        })
+        });
     } else {
-        dataCart.push(itemProduct)
+        dataCart.push(itemProduct);
     }
     localStorage.setItem('cart', JSON.stringify(dataCart));
-    alert('thêm giỏ hàng thành công')
+    alert('Thêm giỏ hàng thành công');
 }
+
 function renderTotalCart() {
     const dataCart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
     const totsaCart = dataCart.reduce(
@@ -89,13 +89,32 @@ function onChangeSL(value, dataItem) {
    this.renderTotalCart()
 }
 
+let orderSuccessFlag = false; // Biến cờ để kiểm tra đã xử lý thành công đơn hàng hay chưa
+
 function handleOrderSuccess() {
+    if (orderSuccessFlag) {
+        return; // Nếu đã xử lý thành công rồi thì không làm gì nữa
+    }
+
+    console.log("Bắt đầu xử lý thành công đơn hàng");
+
+    // Xóa giỏ hàng từ localStorage
     localStorage.removeItem("cart");
+
+    // Cập nhật giao diện
     setTimeout(() => {
         $("#body-cart").empty();
-        $("#total-cart").text(`VNĐ`)
-        $('input[name="total-cart"]').val(0)
-        alert("Bạn mua hàng thành công")
-        window.location.href = window.location.pathname.replace('sanpham', 'trangchu');
-    }, 200)
+        $("#total-cart").text(`0 VNĐ`);
+        $('input[name="total-cart"]').val(0);
+
+        // Thông báo cho người dùng
+        alert("Bạn mua hàng thành công");
+
+        // Chuyển hướng về trang chủ
+        window.location.href = '/view/pages/index.php?pages=trangchu';
+
+        // Đánh dấu đã xử lý thành công
+        orderSuccessFlag = true;
+    }, 200);
 }
+

@@ -91,7 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </tbody>
                         </table>
                         <button class="btn ">
-                            <a href="/view/pages/index.php?pages=trangchu">Tiếp tục mua hàng</a></button>
+                            <!-- <a href="./trangchu.php">Tiếp tục mua hàng</a></button> -->
+                             <!-- Điều hướng về trang chủ  -->
+                              <a href="?pages=trangchu">Tiếp tục mua hàng</a></button>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-4 ">
