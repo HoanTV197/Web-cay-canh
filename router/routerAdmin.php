@@ -56,7 +56,7 @@ if (isset($_GET["admin"])) {
             break;
 
         case "xoaTaiKhoan":
-            include "./nhanvien/xoaTaiKhoan.php";
+            include "./taikhoan/xoaTaiKhoan.php";
             break;
             /*----------------Quản lý hóa đơn nhập ----------*/
         case "hienThiHoaDonNhap":

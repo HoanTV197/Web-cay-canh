@@ -41,5 +41,11 @@ class TaiKhoanController
         `username`='$username';";
         $db->executeSQL($sql);
     }
+
+    public function deleteUser($username){
+        $db = new DB();
+        $sql = "DELETE FROM `user` WHERE `username`='$username';";
+        $db->executeSQL($sql);
+    }
 }
 ?>
