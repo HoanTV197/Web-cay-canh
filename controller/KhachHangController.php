@@ -137,10 +137,9 @@ class KhachHangController{
        }
      }
       /*----------------Xóa khách hàng--------------*/
-      public function deleteCustomer($maKH){
+     public function deleteCustomer($MaKH){
         $db = new DB();
-        $sql="DELETE FROM `khachhang` WHERE MaKH='$maKH';";
-        
+        $sql="DELETE FROM `khachhang` WHERE MaKH='$MaKH';";
         $kq=$db->executeSQL($sql);
         echo $sql;
        if($kq){
