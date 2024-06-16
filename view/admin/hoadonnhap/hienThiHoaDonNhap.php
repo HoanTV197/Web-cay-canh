@@ -21,14 +21,9 @@ function formatCurrency($number) {
 }
 
 // lấy số trang hiện tại
-$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-if ($currentPage < 1) $currentPage = 1;
-
+$currentPage = $_GET['page'] ?? 1;
 // gọi đến controller
 $hdn = new HoaDonNhapController();
-
-// Số bản ghi trên mỗi trang
-$recordsPerPage = 10;
 ?>
 
 <div class="content-wrapper">
@@ -114,10 +109,11 @@ $recordsPerPage = 10;
                                             }
                                             /* Hiển thị danh sách hóa đơn nhập */
                                             foreach ($list as $i) {
+                                                $tongTienAdjusted = $i->getTongTienHD() * 1000 + 30000;
                                                 $str = '<tr>'
                                                     . '<td class="text-center">' . $i->getMaHDN() . '</td>'
                                                     . '<td class="text-center">' . $i->getNgayTao() . '</td>'
-                                                    . '<td class="text-center">' . formatCurrency($i->getTongTienHD()) . '</td>'
+                                                    . '<td class="text-center">' . formatCurrency($tongTienAdjusted) . '</td>'
                                                     . '<td class="text-center">' . $i->getMaSoThue() . '</td>'
                                                     . '<td class="text-center">' . $i->getGhiChu() . '</td>'
                                                     . '<td class="text-center">' . $i->getPTThanhToan() . '</td>'
@@ -125,6 +121,7 @@ $recordsPerPage = 10;
                                                     . '<td class="text-center">' . $i->getTrangThai() . '</td>'
                                                     . "<td>
                                                         <a class='btn btn-success btn-xs' href='?admin=xemHDN&MaHDN=" . $i->getMaHDN() . "'>Xem</a>
+                                             
                                                     </td>
                                                 </tr>";
                                                 echo $str;
@@ -138,33 +135,19 @@ $recordsPerPage = 10;
                                         <ul class="pagination">
                                             <!-- --------------------------------Phân trang----------------------------------- -->
                                             <?php
-                                            $totalRecords = $hdn->sumPage();
-                                            $totalPages = ceil($totalRecords / $recordsPerPage);
-
-                                            echo '<li><a href="?admin=hienThiHoaDonNhap&page=' . max(1, $currentPage - 1) . '"> <</a></li>';
-                                            
-                                            if ($totalPages <= 10) {
-                                                for ($i = 1; $i <= $totalPages; $i++) {
-                                                    echo '<li' . ($i == $currentPage ? ' class="active"' : '') . '><a href="?admin=hienThiHoaDonNhap&page=' . $i . '">' . $i . '</a></li>';
+                                            $n = round($hdn->sumPage() / 10);
+                                            echo '<li><a href="?admin=hienThiHoaDonNhap&page=' . ($currentPage >= 2 ? $currentPage - 1 : $currentPage) . '"> <</a></li>';
+                                            for ($i = 1; $i <= $n; $i++) {
+                                                $str = '<li><a href="?admin=hienThiHoaDonNhap&page=' . $i . '">' . $i . '</a></li>';
+                                                if ($i > 5 && $i < $n) {
+                                                    $str = '<li>...</li>';
+                                                    $str = '<li><a href="?admin=hienThiHoaDonNhap&page=' . $n . '">' . $n . '</a></li>';
+                                                    echo $str;
+                                                    break;
                                                 }
-                                            } else {
-                                                for ($i = 1; $i <= 3; $i++) {
-                                                    echo '<li' . ($i == $currentPage ? ' class="active"' : '') . '><a href="?admin=hienThiHoaDonNhap&page=' . $i . '">' . $i . '</a></li>';
-                                                }
-
-                                                if ($currentPage > 4 && $currentPage < $totalPages - 3) {
-                                                    echo '<li><a href="?admin=hienThiHoaDonNhap&page=' . $currentPage . '">' . $currentPage . '</a></li>';
-                                                    echo '<li><span>...</span></li>';
-                                                } else {
-                                                    echo '<li><span>...</span></li>';
-                                                }
-
-                                                for ($i = max($totalPages - 2, $currentPage + 1); $i <= $totalPages; $i++) {
-                                                    echo '<li' . ($i == $currentPage ? ' class="active"' : '') . '><a href="?admin=hienThiHoaDonNhap&page=' . $i . '">' . $i . '</a></li>';
-                                                }
+                                                echo $str;
                                             }
-
-                                            echo '<li><a href="?admin=hienThiHoaDonNhap&page=' . min($totalPages, $currentPage + 1) . '">></a></li>';
+                                            echo '<li><a href="?admin=hienThiHoaDonNhap&page=' . ($currentPage >= $n ? $currentPage : $currentPage + 1) . '">></a></li>';
                                             ?>
                                         </ul>
                                     </div>
