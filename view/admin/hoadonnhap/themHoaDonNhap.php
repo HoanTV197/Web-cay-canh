@@ -1,7 +1,10 @@
 <?php
 // Start output buffering
 ob_start();
-session_start();
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 include '../../controller/HoaDonNhapController.php';
 
@@ -26,6 +29,14 @@ if (isset($_POST['mst'])) {
     $MaHDN = $hdn->autoMaHDN();
     $MaCTHDN = $hdn->autoMaCTHDN();
     
+    // Ensure the IDs are unique
+    while ($hdn->checkDuplicateHDN($MaHDN)) {
+        $MaHDN = $hdn->autoMaHDN();
+    }
+    while ($hdn->checkDuplicateCTHDN($MaCTHDN)) {
+        $MaCTHDN = $hdn->autoMaCTHDN();
+    }
+
     // Xử lý dữ liệu
     $hdn->insertHDN($MaHDN, $NgayTao, $TongTienHD, $MaSoThue, $PTThanhToan, 'Hoàn thành', 0, $GhiChu, $MaNCC, $MaNV);
     $kq = $hdn->insertCTHDN($MaHDN, $MaCTHDN, $MaSP, $SoLuong);
@@ -43,6 +54,7 @@ if (isset($_POST['mst'])) {
 // End output buffering and flush the buffer
 ob_end_flush();
 ?>
+
 
 <style>
     /* CSS nâng cao cho form nhập hóa đơn */
